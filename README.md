@@ -3,7 +3,7 @@
 Marketing site + online booking app for **AM4LESS**, a commercial & residential cleaning company in Quakertown, PA.
 
 Live production: **https://am4less-booking.vercel.app**
-Source: **https://github.com/7Dark7Cloud7/am4less-booking** (private)
+Source: **https://github.com/7Dark7Cloud7/am4less-booking** (public)
 (The company domain `am4less.com` still points at the old Duda site — untouched.)
 
 ## What it does

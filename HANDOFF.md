@@ -11,7 +11,7 @@ cleaning company in Quakertown, PA (Bucks & Lehigh County). It replaces a market
 site with an **online client-acquisition tool**: browse services → get a scoped quote request →
 send it to the crew — no account, no card, no backend required.
 
-- **Source control:** https://github.com/7Dark7Cloud7/am4less-booking (private) — `main`, full app + `photos-src/`
+- **Source control:** https://github.com/7Dark7Cloud7/am4less-booking (**public**) — `main`, full app + `photos-src/`
 - **Live production:** https://am4less-booking.vercel.app (Vercel project `am4less-booking`, team `7dark7cloud7s-projects`)
 - **Company domain:** `am4less.com` still points at the old Duda site. DNS was deliberately **not** switched — that is a business decision pending the owner (see §10).
 - **Build status:** typecheck + production build clean; deployed and smoke-tested.
@@ -240,10 +240,16 @@ node --use-system-ca node_modules/vercel/dist/vc.js deploy --prod
 
 Two channels, identical contents:
 
-1. **GitHub** — https://github.com/7Dark7Cloud7/am4less-booking (private). Clone, `npm install`, `npm run dev`.
-   To work on it, the developer needs to be added as a collaborator: repo **Settings → Collaborators → Add people**.
+1. **GitHub** — https://github.com/7Dark7Cloud7/am4less-booking (**public**, so anyone can clone and read it).
+   Clone, `npm install`, `npm run dev`. To let someone push branches, add them as a collaborator with Write:
+   repo **Settings → Collaborators and teams → Add people**.
 2. **ZIP** — `am4less-booking-handoff.zip` (the folder owner keeps locally), same tree, built with
-   `node_modules/`, `dist/`, `dev-dist/`, `.vercel/` and `.env.local` excluded.
+   `.git`, `node_modules/`, `dist/`, `dev-dist/`, `.vercel/` and `.env.local` excluded.
+
+**Heads-up for a public repo:** `src/domain/services.ts` carries the owner's *internal planning rates*
+(`rate: 0.07` per sq ft, `rate: 48` per hour, and so on). They are never rendered while `PUBLIC_PRICING`
+stays false, but they are readable by anyone browsing the code. If that matters commercially, say so before
+merging anything else into `main` — moving them into a gitignored config file is a small change.
 
 `.env.local` and `.vercel/` were deliberately **not** shared: they hold a `VERCEL_OIDC_TOKEN` and this
 machine's Vercel link. On a new machine, `vercel login` + `vercel link` re-creates both. The Vercel project
