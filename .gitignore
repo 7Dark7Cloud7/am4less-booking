@@ -1,0 +1,14 @@
+node_modules
+dist
+dev-dist
+
+# Vercel link + secrets — never commit
+.vercel
+.env
+.env.*
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.local
+*.log

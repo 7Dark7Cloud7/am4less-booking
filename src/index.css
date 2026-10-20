@@ -1,0 +1,254 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------- brand tokens ---------- */
+@theme {
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Sora', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: oklch(0.962 0.015 266);
+  --color-brand-100: oklch(0.932 0.03 266);
+  --color-brand-200: oklch(0.876 0.055 266);
+  --color-brand-300: oklch(0.792 0.09 266);
+  --color-brand-400: oklch(0.66 0.16 266);
+  --color-brand-500: oklch(0.545 0.235 265);
+  --color-brand-600: oklch(0.4317 0.2992 264);
+  --color-brand-700: oklch(0.372 0.265 264);
+  --color-brand-800: oklch(0.31 0.205 264);
+  --color-brand-900: oklch(0.255 0.14 264);
+  --color-brand-950: oklch(0.172 0.071 268);
+
+  /* the logo's red ring — used for focus, emphasis and destructive accents */
+  --color-accent-50: oklch(0.968 0.014 19);
+  --color-accent-100: oklch(0.936 0.03 19);
+  --color-accent-200: oklch(0.874 0.058 19);
+  --color-accent-300: oklch(0.795 0.098 19);
+  --color-accent-400: oklch(0.672 0.148 19);
+  --color-accent-500: oklch(0.6 0.168 19);
+  --color-accent-600: oklch(0.5378 0.1718 19);
+  --color-accent-700: oklch(0.475 0.155 19);
+  --color-accent-800: oklch(0.395 0.12 19);
+  --color-accent-900: oklch(0.32 0.085 19);
+
+  /* semantic surface set — remapped under [data-theme=dark] */
+  --color-surface: oklch(1 0 0);
+  --color-surface-muted: oklch(0.975 0.007 266);
+  --color-surface-raised: oklch(1 0 0);
+  --color-ink: oklch(0.188 0.032 266);
+  --color-ink-soft: oklch(0.435 0.021 266);
+  --color-ink-faint: oklch(0.555 0.015 266);
+  --color-line: oklch(0.902 0.009 266);
+  --color-line-strong: oklch(0.826 0.013 266);
+  --color-inverse: oklch(0.172 0.071 268);
+  --color-inverse-ink: oklch(0.962 0.014 266);
+
+  --color-success: oklch(0.52 0.13 155);
+  --color-warning: oklch(0.62 0.14 78);
+  --color-danger: oklch(0.51 0.19 25);
+
+  --radius-card: 1rem;
+  --radius-field: 0.6875rem;
+
+  --shadow-card: 0 1px 2px oklch(0.2 0.02 258 / 0.05), 0 10px 30px -12px oklch(0.2 0.02 258 / 0.18);
+  --shadow-lift: 0 2px 6px oklch(0.2 0.02 258 / 0.08), 0 22px 44px -18px oklch(0.2 0.02 258 / 0.28);
+  --shadow-bar: 0 -6px 24px -8px oklch(0.2 0.02 258 / 0.22);
+
+  --spacing-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+[data-theme='dark'] {
+  --color-surface: oklch(0.192 0.037 266);
+  --color-surface-muted: oklch(0.238 0.04 266);
+  --color-surface-raised: oklch(0.268 0.042 266);
+  --color-ink: oklch(0.962 0.008 266);
+  --color-ink-soft: oklch(0.808 0.014 266);
+  --color-ink-faint: oklch(0.688 0.018 266);
+  --color-line: oklch(0.335 0.032 266);
+  --color-line-strong: oklch(0.425 0.036 266);
+  --color-inverse: oklch(0.134 0.05 266);
+  --color-inverse-ink: oklch(0.962 0.008 266);
+
+  /* status colours need lifting to clear 4.5:1 against a dark surface */
+  --color-success: oklch(0.76 0.13 155);
+  --color-warning: oklch(0.8 0.14 84);
+  --color-danger: oklch(0.71 0.155 25);
+
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.35), 0 10px 30px -12px oklch(0 0 0 / 0.5);
+  --shadow-lift: 0 2px 6px oklch(0 0 0 / 0.4), 0 22px 44px -18px oklch(0 0 0 / 0.6);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+    /* Long emails, addresses and phone hrefs must never stretch the 320px viewport. */
+    overflow-wrap: break-word;
+  }
+
+  /* Kills the 300ms double-tap-zoom delay on Android and keeps pinch intact. */
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  [data-theme='dark'] :focus-visible {
+    outline-color: var(--color-accent-400);
+  }
+
+  ::selection {
+    background: var(--color-brand-200);
+    color: var(--color-brand-950);
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .card-surface {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .field-control {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.8rem 0.95rem;
+    font-size: 1rem;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-field);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .field-control:hover {
+    border-color: var(--color-brand-300);
+  }
+
+  .field-control:focus {
+    outline: none;
+    border-color: var(--color-brand-500);
+    box-shadow: 0 0 0 4px oklch(0.592 0.129 245 / 0.18);
+  }
+
+  .field-control::placeholder {
+    color: var(--color-ink-faint);
+    opacity: 1;
+  }
+
+  .field-control[aria-invalid='true'] {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 4px oklch(0.556 0.19 25 / 0.14);
+  }
+
+  .tap-target {
+    min-height: 2.875rem;
+    min-width: 2.875rem;
+  }
+}
+
+@utility text-balance-tight {
+  text-wrap: balance;
+}
+
+/* ---------- motion ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .animate-rise {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
