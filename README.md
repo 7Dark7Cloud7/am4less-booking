@@ -1,5 +1,7 @@
 # AM4LESS Booking
 
+![CI](https://github.com/7Dark7Cloud7/am4less-booking/actions/workflows/ci.yml/badge.svg)
+
 Marketing site + online booking app for **AM4LESS**, a commercial & residential cleaning company in Quakertown, PA.
 
 Live production: **https://am4less-booking.vercel.app**
@@ -31,3 +33,9 @@ Node 20.19+ or 22.12+ required (Vite 7).
 2. **No published prices.** `PUBLIC_PRICING` in `src/domain/config.ts` is `false` until the owner agrees a rate card. The estimator exists and runs, but its dollar output must never be rendered in the UI while the flag is off.
 
 Full details, architecture map and deploy runbook: **[HANDOFF.md](./HANDOFF.md)**.
+
+## Licence
+
+Proprietary. The repository is public so a developer can pick the project up — it is not open source.
+All rights reserved by AM4LESS; no licence is granted to copy, redistribute, or reuse this code or the
+brand assets in `public/brand/` without the owner's written permission.

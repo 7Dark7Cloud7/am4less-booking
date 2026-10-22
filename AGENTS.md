@@ -14,7 +14,9 @@ npm run photos      # rebuild photo assets + photos.generated.ts from photos-src
 npm run icons       # regenerate PWA icons from public/brand/logo-am4less.webp
 ```
 
-No test runner is configured yet. Verification is typecheck + build + browser QA (checklist in `HANDOFF.md` §9).
+No test runner is configured yet. CI (`.github/workflows/ci.yml`) runs `npm ci` → `typecheck` → `build` on
+every push and PR, then fails if `PUBLIC_PRICING` is no longer `false`. Browser QA is still required
+(checklist in `HANDOFF.md` §9).
 
 ## Product rules — do not violate
 

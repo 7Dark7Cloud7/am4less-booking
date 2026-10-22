@@ -46,6 +46,10 @@ npm run preview    # serve dist/ locally
 
 Node **20.19+ or 22.12+** (Vite 7 requirement; developed on Node 24).
 
+**CI:** `.github/workflows/ci.yml` runs `npm ci` → `npm run typecheck` → `npm run build` on every push to
+`main` and every PR, then **fails the build if `PUBLIC_PRICING` has been flipped to `true`** — so an
+accidental (or AI-generated) price reveal cannot merge silently.
+
 Asset scripts (rarely needed, see §7):
 
 ```bash
@@ -215,7 +219,8 @@ node --use-system-ca node_modules/vercel/dist/vc.js deploy --prod
 
 ### QA checklist before shipping changes
 
-1. `npm run typecheck && npm run build` clean.
+0. CI green on your branch (typecheck, build, and the `PUBLIC_PRICING` guard).
+1. `npm run typecheck && npm run build` clean locally.
 2. **No `$` anywhere in rendered UI** (while `PUBLIC_PRICING` is false).
 3. Coming-soon lines: visible as shadow cards on `/services`, impossible to select in the wizard.
 4. 320 px viewport: no horizontal scroll (long emails/addresses wrap — `overflow-wrap` is set globally for this).
@@ -245,6 +250,9 @@ Two channels, identical contents:
    repo **Settings → Collaborators and teams → Add people**.
 2. **ZIP** — `am4less-booking-handoff.zip` (the folder owner keeps locally), same tree, built with
    `.git`, `node_modules/`, `dist/`, `dev-dist/`, `.vercel/` and `.env.local` excluded.
+
+**Licence:** public for handoff, **not** open source. No licence is granted to reuse the code or the brand
+assets in `public/brand/` — see the Licence section of `README.md`. Keep that wording if you fork or republish.
 
 **Heads-up for a public repo:** `src/domain/services.ts` carries the owner's *internal planning rates*
 (`rate: 0.07` per sq ft, `rate: 48` per hour, and so on). They are never rendered while `PUBLIC_PRICING`
