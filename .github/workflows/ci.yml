@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Prices must stay unpublished
+        run: |
+          node -e "
+          const src = require('fs').readFileSync('src/domain/config.ts', 'utf8');
+          if (!/PUBLIC_PRICING\s*=\s*false/.test(src)) {
+            console.error('PUBLIC_PRICING must be false until the owner agrees a rate card (HANDOFF.md section 3b).');
+            process.exit(1);
+          }
+          "
