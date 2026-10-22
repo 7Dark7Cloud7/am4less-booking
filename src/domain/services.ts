@@ -331,5 +331,6 @@ export function servicesInCategory(id: string): ServiceItem[] {
 }
 
 export function isBookable(id: string): boolean {
-  return SERVICE_BY_ID.get(id)?.comingSoon !== true
+  const service = SERVICE_BY_ID.get(id)
+  return service !== undefined && service.comingSoon !== true
 }

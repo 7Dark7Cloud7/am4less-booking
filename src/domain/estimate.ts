@@ -255,7 +255,7 @@ export function jobPlanFor(
     perMonth === null
       ? 'One-time visit'
       : perMonth >= 1
-        ? `${perMonth} visits a month`
+        ? `${perMonth} visit${perMonth === 1 ? '' : 's'} a month`
         : `${Math.round(perMonth * 12)} visits a year`
 
   return { crewHours, crewSize, elapsedHours, visitsPerMonth: perMonth, needsSurvey, headline, cadence }
