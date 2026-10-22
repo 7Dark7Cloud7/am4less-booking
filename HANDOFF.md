@@ -248,8 +248,12 @@ Two channels, identical contents:
 1. **GitHub** — https://github.com/7Dark7Cloud7/am4less-booking (**public**, so anyone can clone and read it).
    Clone, `npm install`, `npm run dev`. To let someone push branches, add them as a collaborator with Write:
    repo **Settings → Collaborators and teams → Add people**.
-2. **ZIP** — `am4less-booking-handoff.zip` (the folder owner keeps locally), same tree, built with
-   `.git`, `node_modules/`, `dist/`, `dev-dist/`, `.vercel/` and `.env.local` excluded.
+2. **ZIP** — `am4less-booking-handoff.zip` (the folder owner keeps locally), the tracked `main` tree and nothing
+   else. Reproduce it with `git archive --format=zip --prefix=am4less-booking/ -o ../am4less-booking-handoff.zip HEAD`,
+   which excludes `.git`, `node_modules/`, `dist/`, `dev-dist/`, `.vercel/` and `.env.local` because they are gitignored.
+   Verified by extracting the archive into an empty folder and running `npm ci && npm run typecheck && npm run build`.
+   Note: build it with `git archive` (or the GitHub Sources button), not PowerShell's `Compress-Archive` — that one
+   writes backslash entry names, which extract as one flat junk-file on macOS and Linux.
 
 **Licence:** public for handoff, **not** open source. No licence is granted to reuse the code or the brand
 assets in `public/brand/` — see the Licence section of `README.md`. Keep that wording if you fork or republish.
