@@ -14,7 +14,7 @@ send it to the crew — no account, no card, no backend required.
 - **Source control:** https://github.com/7Dark7Cloud7/am4less-booking (**public**) — `main`, full app + `photos-src/`
 - **Live production:** https://am4less-booking.vercel.app (Vercel project `am4less-booking`, team `7dark7cloud7s-projects`)
 - **Company domain:** `am4less.com` still points at the old Duda site. DNS was deliberately **not** switched — that is a business decision pending the owner (see §10).
-- **Build status:** typecheck + production build clean; deployed and smoke-tested.
+- **Build status:** typecheck, 72 domain tests, production build all clean; deployed and smoke-tested.
 
 ### Routes
 
@@ -40,14 +40,15 @@ send it to the crew — no account, no card, no backend required.
 npm install
 npm run dev        # http://localhost:5173 (host: true, so LAN/phone testing works)
 npm run typecheck  # tsc --noEmit
+npm run test       # vitest run — domain rules suite (src/domain/*.test.ts)
 npm run build      # typecheck && vite build  -> dist/
 npm run preview    # serve dist/ locally
 ```
 
 Node **20.19+ or 22.12+** (Vite 7 requirement; developed on Node 24).
 
-**CI:** `.github/workflows/ci.yml` runs `npm ci` → `npm run typecheck` → `npm run build` on every push to
-`main` and every PR, then **fails the build if `PUBLIC_PRICING` has been flipped to `true`** — so an
+**CI:** `.github/workflows/ci.yml` runs `npm ci` → `npm run typecheck` → `npm run test` → `npm run build` on
+every push to `main` and every PR, then **fails the build if `PUBLIC_PRICING` has been flipped to `true`** — so an
 accidental (or AI-generated) price reveal cannot merge silently.
 
 Asset scripts (rarely needed, see §7):
@@ -58,8 +59,12 @@ npm run photos:sheet # contact sheets of photos-src/ for picking new photo slugs
 npm run icons        # regenerate PWA icons from public/brand/logo-am4less.webp
 ```
 
-**There are no automated tests in the repo.** Correctness is verified by typecheck, build, and
-browser QA (see §9). Adding Vitest for the pure `src/domain/*` functions would be a good first task.
+**Tests:** `npm run test` (Vitest, node environment, no DOM) covers the pure `src/domain/*` logic — 72 tests in
+six files: `services.test.ts` (the nine-line bookability rule), `estimate.test.ts` (the internal dollar maths),
+`job-plan.test.ts` (crew sizing and cadence wording), `validation.test.ts` (contact and draft rules),
+`booking.test.ts` (reference format, draft vs submitted) and `pricing-rules.test.ts` (no `$` may leave the
+customer-facing string builders). There are still **no component or E2E tests**: browser QA in §9 covers those.
+A change to a domain rule should arrive with its test updated in the same commit.
 
 ---
 
@@ -81,13 +86,20 @@ construction, event-production, logistics and some deep-maintenance lines are ma
 **To launch a line:** delete its `comingSoon: true` in `services.ts`. The filter strip, counts,
 wizard and job planner all pick it up automatically.
 
+`src/domain/services.test.ts` pins the nine ids by name and asserts that every other line — including the
+transport, staging and lighting ones — stays unbookable, and that an unknown id is *not* bookable. Launching a
+line without asking the owner is exactly what that test catches, so update the fixture in the same commit and
+say so in the PR.
+
 ### 3b. No published prices until the owner sets a rate card
 
 - `src/domain/config.ts` → `export const PUBLIC_PRICING = false`. **This is the single switch.**
 - Real internal rates exist (owner's planning numbers, Bucks/Lehigh market) in each service's `pricing` field in `services.ts`. They are used by the estimator and by the job planner — they are never displayed.
 - `estimateFor()` in `src/domain/estimate.ts` still computes real dollars. Its only consumer is the **webhook payload** (`estimateTotal`, `estimateMonthly` in `src/infrastructure/leadDelivery.ts`) — i.e. numbers go to the owner's own endpoint, never to the customer's screen.
 - What the customer sees instead is the **JobPlan** from `jobPlanFor()`: crew size, crew-hours, hours on site, visits per month, "written price after a free survey". Rendered by `EstimatePanel`, `Account`, `ReviewStep`.
-- **Rule of thumb: no `$` may appear in rendered UI while the flag is `false`.** Before shipping copy changes, grep the built output for dollars.
+- **Rule of thumb: no `$` may appear in rendered UI while the flag is `false`.** `npm run test` proves it for the
+  string builders (`src/domain/pricing-rules.test.ts` walks every bookable line × property type × frequency).
+  Before shipping copy changes, also grep the built output for dollars.
 - When the owner finally publishes rates: flip the flag, then re-surface price blocks using `currency()` / `estimate.lines` — the plumbing is already there (`EstimatePanel` has the price branch behind the flag).
 
 ---
@@ -164,6 +176,8 @@ Apps Script, Supabase Edge Function, custom API). A future backend only needs to
 | Nav items (header + mobile tab bar) | `src/components/Header.tsx`, `src/components/TabBar.tsx` |
 | PWA manifest, icons, shortcuts, caching | `vite.config.ts` |
 | Routes | `src/App.tsx` |
+| Domain rule tests (bookability, no-prices, crew maths) | `src/domain/*.test.ts` |
+| Test runner config | `vitest.config.ts` (node environment, `src/**/*.test.ts`) |
 
 ---
 
@@ -219,8 +233,8 @@ node --use-system-ca node_modules/vercel/dist/vc.js deploy --prod
 
 ### QA checklist before shipping changes
 
-0. CI green on your branch (typecheck, build, and the `PUBLIC_PRICING` guard).
-1. `npm run typecheck && npm run build` clean locally.
+0. CI green on your branch (typecheck, tests, build, and the `PUBLIC_PRICING` guard).
+1. `npm run typecheck && npm run test && npm run build` clean locally.
 2. **No `$` anywhere in rendered UI** (while `PUBLIC_PRICING` is false).
 3. Coming-soon lines: visible as shadow cards on `/services`, impossible to select in the wizard.
 4. 320 px viewport: no horizontal scroll (long emails/addresses wrap — `overflow-wrap` is set globally for this).
@@ -251,7 +265,7 @@ Two channels, identical contents:
 2. **ZIP** — `am4less-booking-handoff.zip` (the folder owner keeps locally), the tracked `main` tree and nothing
    else. Reproduce it with `git archive --format=zip --prefix=am4less-booking/ -o ../am4less-booking-handoff.zip HEAD`,
    which excludes `.git`, `node_modules/`, `dist/`, `dev-dist/`, `.vercel/` and `.env.local` because they are gitignored.
-   Verified by extracting the archive into an empty folder and running `npm ci && npm run typecheck && npm run build`.
+   Verified by extracting the archive into an empty folder and running `npm ci && npm run typecheck && npm run test && npm run build`.
    Note: build it with `git archive` (or the GitHub Sources button), not PowerShell's `Compress-Archive` — that one
    writes backslash entry names, which extract as one flat junk-file on macOS and Linux.
 
@@ -279,7 +293,7 @@ constraints instead of discovering them by breaking them.
 Recommended first prompt for whoever takes this over:
 
 > Read `AGENTS.md` and `HANDOFF.md` §3 before changing anything. Then <your task>. Keep `PUBLIC_PRICING`
-> false, keep coming-soon lines unselectable, and finish only when `npm run typecheck && npm run build`
+> false, keep coming-soon lines unselectable, and finish only when `npm run typecheck && npm run test && npm run build`
 > passes and the checklist in `HANDOFF.md` §9 holds at 320 px in both themes.
 
 The three things an assistant will get wrong if you don't stop it: (a) re-introducing dollar prices,

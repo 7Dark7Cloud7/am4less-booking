@@ -21,6 +21,7 @@ Source: **https://github.com/7Dark7Cloud7/am4less-booking** (public)
 npm install
 npm run dev        # http://localhost:5173
 npm run typecheck  # tsc --noEmit
+npm run test       # vitest run — the domain rules suite (src/domain/*.test.ts)
 npm run build      # typecheck + production build to dist/
 npm run preview    # serve the built app
 ```

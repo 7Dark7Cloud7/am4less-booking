@@ -9,25 +9,28 @@ the short list of rules that AI coding assistants (Qoder, Claude, Cursor, Copilo
 npm install
 npm run dev         # http://localhost:5173
 npm run typecheck   # tsc --noEmit — must stay clean
+npm run test        # vitest run — domain rules suite, must stay green
 npm run build       # typecheck + vite build -> dist/
 npm run photos      # rebuild photo assets + photos.generated.ts from photos-src/
 npm run icons       # regenerate PWA icons from public/brand/logo-am4less.webp
 ```
 
-No test runner is configured yet. CI (`.github/workflows/ci.yml`) runs `npm ci` → `typecheck` → `build` on
-every push and PR, then fails if `PUBLIC_PRICING` is no longer `false`. Browser QA is still required
-(checklist in `HANDOFF.md` §9).
+CI (`.github/workflows/ci.yml`) runs `npm ci` → `typecheck` → `test` → `build` on every push and PR, then fails
+if `PUBLIC_PRICING` is no longer `false`. The tests cover the pure `src/domain/*` layer only — there is no
+component or E2E runner, so browser QA is still required (checklist in `HANDOFF.md` §9).
 
 ## Product rules — do not violate
 
 1. **Never publish a price.** `src/domain/config.ts` → `PUBLIC_PRICING = false`. The estimator
    (`src/domain/estimate.ts` → `estimateFor`) computes dollars on purpose: those numbers go only to the
    owner's webhook payload, never to the screen. Customer-facing surfaces show `jobPlanFor()` instead —
-   crew size, hours on site, visits per month. No `$` may appear in rendered UI while the flag is false.
+   crew size, hours on site, visits per month. No `$` may appear in rendered UI while the flag is false —
+   `src/domain/pricing-rules.test.ts` walks every bookable line × property type × frequency to prove it.
 2. **Only the cleaning lines are bookable.** 9 of the 18 catalogue lines carry `comingSoon: true` in
    `src/domain/services.ts`. They render as greyed "coming soon" cards on `/services` and must stay
    unselectable in the booking wizard. Never add a coming-soon line to a filter, count, CTA or shortcut.
-   To launch a line: delete its `comingSoon: true` and let `BOOKABLE` re-derive everything.
+   To launch a line: delete its `comingSoon: true` and let `BOOKABLE` re-derive everything — but ask the owner
+   first; `src/domain/services.test.ts` lists the nine bookable ids by name on purpose.
 3. **Don't invent business facts.** Phone, WhatsApp, email, hours and coverage all come from
    `src/domain/business.ts` — the only unconfirmed value there is `email`. No fake testimonials, no
    certifications, no guarantees the owner hasn't made.
@@ -37,6 +40,8 @@ every push and PR, then fails if `PUBLIC_PRICING` is no longer `false`. Browser 
 - Layers, one direction only: `pages → hooks → domain`; browser APIs live in `src/infrastructure`.
   `src/domain/*` must stay importable in Node (no `window`, `localStorage`, `fetch`).
 - `noUncheckedIndexedAccess` is ON: `arr[0]` is `T | undefined`. Handle it or add a typed fallback.
+- Domain rules are pinned by `src/domain/*.test.ts` (Vitest, node environment — no DOM, no `localStorage`).
+  Change a rule and change its test in the same commit; never edit an assertion just to make CI go green.
 - Size limits: functions ≤ 50 lines, components ≤ 80 lines, files ≤ 200 lines, nesting ≤ 3.
 - No comments unless the *why* is non-obvious. No new abstractions for a single call site.
 - Styling: Tailwind v4 with the semantic tokens in `src/index.css` (`text-ink`, `text-ink-soft`,
@@ -58,5 +63,5 @@ every push and PR, then fails if `PUBLIC_PRICING` is no longer `false`. Browser 
 
 ## Done means
 
-`npm run typecheck && npm run build` clean, the change checked in both themes at 320/390/768/1440, zero
+`npm run typecheck && npm run test && npm run build` clean, the change checked in both themes at 320/390/768/1440, zero
 dollar figures in rendered text, coming-soon lines still unselectable, and deep links still resolve.

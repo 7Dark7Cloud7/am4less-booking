@@ -9,6 +9,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "photos": "node scripts/make-photos.mjs",
     "photos:sheet": "node scripts/contact-sheet.mjs",
     "icons": "node scripts/make-icons.mjs"
@@ -29,6 +31,7 @@
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3",
     "vite": "^7.1.9",
-    "vite-plugin-pwa": "^1.0.3"
+    "vite-plugin-pwa": "^1.0.3",
+    "vitest": "^5.0.5"
   }
 }
