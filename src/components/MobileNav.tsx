@@ -9,7 +9,7 @@ export function MobileNav({ tone }: { tone: NavTone }) {
     <nav
       id="mobile-nav"
       aria-label="Main"
-      className={`border-t lg:hidden ${tone === 'lux' ? 'border-white/10 bg-obsidian' : 'border-line bg-surface'}`}
+      className={`border-t lg:hidden ${tone === 'lux' ? 'border-white/10 bg-lux-base' : 'border-line bg-surface'}`}
     >
       <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] py-3">
         {NAV.map((item) => (
@@ -27,7 +27,7 @@ export function MobileNav({ tone }: { tone: NavTone }) {
           </NavLink>
         ))}
         <div className="mt-4 grid gap-2">
-          <RouteButton to="/book" variant={tone === 'lux' ? 'gold' : 'primary'} block>
+          <RouteButton to="/book" variant={tone === 'lux' ? 'accent' : 'primary'} block>
             <CalendarCheck2 className="size-4" aria-hidden="true" />
             Book a cleaning
           </RouteButton>

@@ -18,8 +18,8 @@ const TONES: Record<NavTone, { idle: string; active: string }> = {
     active: 'bg-brand-50 text-brand-700 dark:bg-brand-900/60 dark:text-brand-200'
   },
   lux: {
-    idle: 'text-ivory/65 hover:bg-white/5 hover:text-ivory',
-    active: 'bg-gold/10 text-gold-soft'
+    idle: 'text-lux-fg/65 hover:bg-white/5 hover:text-lux-fg',
+    active: 'bg-accent-500/15 text-accent-300'
   }
 }
 

@@ -1,15 +1,13 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-type Variant = 'primary' | 'accent' | 'outline' | 'ghost' | 'onDark' | 'outlineOnDark' | 'danger' | 'gold'
+type Variant = 'primary' | 'accent' | 'outline' | 'ghost' | 'onDark' | 'outlineOnDark' | 'danger'
 type Size = 'sm' | 'md' | 'lg'
 
 const VARIANTS: Record<Variant, string> = {
   primary:
     'bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 dark:bg-brand-400 dark:text-brand-950 dark:hover:bg-brand-300',
-  accent: 'bg-accent-600 text-white hover:bg-accent-700 active:bg-accent-800 font-bold',
-  /** Editorial surfaces: champagne gold on obsidian, dark ink for AA contrast. */
-  gold: 'bg-gold text-obsidian hover:bg-gold-soft active:bg-gold-soft font-semibold tracking-wide',
+  accent: 'bg-accent-700 text-white hover:bg-accent-800 active:bg-accent-900 font-bold',
   outline:
     'bg-surface text-ink border border-line-strong hover:border-brand-400 hover:bg-surface-muted dark:bg-transparent',
   ghost: 'bg-transparent text-ink hover:bg-surface-muted',
@@ -20,7 +18,7 @@ const VARIANTS: Record<Variant, string> = {
 }
 
 const SIZES: Record<Size, string> = {
-  sm: 'min-h-[2.5rem] px-4 py-1.5 text-sm',
+  sm: 'min-h-11 px-4 py-1.5 text-sm',
   md: 'min-h-[3.1rem] px-5 py-2.5 text-[0.95rem]',
   lg: 'min-h-[3.4rem] px-7 py-3 text-base'
 }

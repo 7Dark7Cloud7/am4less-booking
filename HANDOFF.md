@@ -174,7 +174,7 @@ Apps Script, Supabase Edge Function, custom API). A future backend only needs to
 | Photo slots used by pages | `src/domain/media.ts` (`SLOT_SLUGS`) |
 | Brand colours, fonts, base styles | `src/index.css` |
 | Home page composition (editorial sections) | `src/pages/Home.tsx` + `src/components/home/*` |
-| Editorial palette/typography (`obsidian`, `ivory`, `gold`) | `src/index.css` → `@theme` + `.lux` classes; **home only** |
+| Editorial palette/typography (`lux-base`, `lux-fg`, logo red) | `src/index.css` → `@theme` + `.lux` classes; **home only** |
 | Nav items (header + mobile tab bar) | `src/components/nav.ts`, `Header.tsx`, `MobileNav.tsx`, `TabBar.tsx` |
 | PWA manifest, icons, shortcuts, caching | `vite.config.ts` |
 | Routes | `src/App.tsx` |
@@ -183,8 +183,9 @@ Apps Script, Supabase Edge Function, custom API). A future backend only needs to
 
 The home page is deliberately a different visual world from the rest of the app: a dark editorial
 composition (`.lux` scope) built from `src/components/home/*` — hero, ticker, disciplines, five service
-chapters, standard, pillars, coverage, closing. It uses only real domain content (service detail bullets,
-`jobPlanFor` crew sizing, published hours and coverage) and no prices. `Header`, `Footer`, `MobileNav` and
+chapters, standard, pillars, coverage, closing. The palette is the badge's own: royal-navy ground,
+cool-white type, logo-red emphasis, and the brand Sora + Public Sans pairing. It uses only real domain
+content (service detail bullets, `jobPlanFor` crew sizing, published hours and coverage) and no prices. `Header`, `Footer`, `MobileNav` and
 `TabBar` take a `lux`/`light` tone; the other pages keep the light commercial shell. Keep the `.lux`
 tokens scoped to the home page — do not restyle the booking flow with them.
 

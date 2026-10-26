@@ -22,12 +22,12 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   return (
     <header
       className={`safe-area-top sticky top-0 z-50 border-b backdrop-blur-lg ${
-        overlay ? 'border-white/10 bg-obsidian/80' : 'border-line bg-surface/85'
+        overlay ? 'border-white/10 bg-lux-base/90' : 'border-line bg-surface/85'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-[clamp(1rem,0.5rem+2vw,2rem)]">
         <Link to="/" className="flex min-w-0 items-center py-2.5 no-underline" aria-label="AM4LESS — home">
-          <BrandMark size={40} />
+          <BrandMark size={40} tone={overlay ? 'lux' : 'auto'} />
         </Link>
 
         <nav aria-label="Main" className="ms-auto hidden items-center gap-0.5 lg:flex">
@@ -61,7 +61,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
             </button>
           )}
           <div className="hidden sm:block">
-            <RouteButton to="/book" size="sm" variant={overlay ? 'gold' : 'primary'} className="min-h-11">
+            <RouteButton to="/book" size="sm" variant={overlay ? 'accent' : 'primary'} className="min-h-11">
               <CalendarCheck2 className="size-4" aria-hidden="true" />
               <span className="whitespace-nowrap">{overlay ? 'Book a cleaning' : 'Book now'}</span>
             </RouteButton>
@@ -69,7 +69,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           <Button
             variant="ghost"
             size="sm"
-            className={`tap-target !min-h-11 min-w-11 lg:hidden ${overlay ? 'text-ivory hover:bg-white/10' : ''}`}
+            className={`tap-target !min-h-11 min-w-11 lg:hidden ${overlay ? 'text-lux-fg hover:bg-white/10' : ''}`}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}

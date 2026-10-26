@@ -12,14 +12,14 @@ interface FooterProps {
 export function Footer({ tone = 'light' }: FooterProps) {
   const lux = tone === 'lux'
   const linkClass = lux
-    ? 'text-ivory-soft no-underline transition-colors hover:text-gold'
+    ? 'text-lux-fg-soft no-underline transition-colors hover:text-accent-400'
     : 'text-brand-200 no-underline hover:text-accent-400 hover:underline'
-  const muteClass = lux ? 'text-ivory-faint' : 'text-brand-300'
+  const muteClass = lux ? 'text-lux-fg-faint' : 'text-brand-300'
   const navLink = `flex min-h-11 items-center ${linkClass}`
 
   return (
     <footer
-      className={`${lux ? 'font-[family-name:var(--font-lux)] bg-obsidian text-ivory-soft' : 'mt-16 bg-brand-950 text-brand-100 dark:bg-[oklch(0.12_0.025_266)]'}`}
+      className={`${lux ? 'font-[family-name:var(--font-lux)] border-t border-brand-800/70 bg-lux-base text-lux-fg-soft' : 'mt-16 bg-brand-950 text-brand-100 dark:bg-[oklch(0.12_0.025_266)]'}`}
     >
       <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] pt-14 pb-[calc(5.5rem+var(--spacing-safe-bottom))] lg:pb-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -35,17 +35,17 @@ export function Footer({ tone = 'light' }: FooterProps) {
               />
               <span>
                 <span className="block font-[family-name:var(--font-display)] text-xl font-bold text-white">
-                  AM4<span className={lux ? 'text-gold' : 'text-accent-400'}>LESS</span>
+                  AM4<span className="text-accent-400">LESS</span>
                 </span>
                 <span
-                  className={`text-[0.68rem] font-semibold tracking-wide uppercase ${lux ? 'text-ivory-faint' : 'text-brand-300'}`}
+                  className={`text-[0.68rem] font-semibold tracking-wide uppercase ${lux ? 'text-lux-fg-faint' : 'text-brand-300'}`}
                 >
                   Quality goods &amp; services
                 </span>
               </span>
             </div>
-            <p className={`mt-3 text-sm font-semibold ${lux ? 'text-gold' : 'text-accent-400'}`}>{BUSINESS.slogan}</p>
-            <p className={`mt-3 text-sm ${lux ? 'text-ivory-soft' : 'text-brand-200'}`}>{BUSINESS.tagline}</p>
+            <p className="mt-3 text-sm font-semibold text-accent-400">{BUSINESS.slogan}</p>
+            <p className={`mt-3 text-sm ${lux ? 'text-lux-fg-soft' : 'text-brand-200'}`}>{BUSINESS.tagline}</p>
             <p className={`mt-3 text-sm ${muteClass}`}>{BUSINESS.foundedNote}</p>
             <div className="mt-4 flex gap-2">
               <Social href={BUSINESS.social.facebook} label="Facebook" lux={lux}>
@@ -113,7 +113,7 @@ export function Footer({ tone = 'light' }: FooterProps) {
                 <span>
                   {BUSINESS.city}, {BUSINESS.region} {BUSINESS.postalCode}
                   <br />
-                  <span className={lux ? 'text-ivory-faint' : 'text-brand-400'}>{BUSINESS.areaServed}</span>
+                  <span className={lux ? 'text-lux-fg-faint' : 'text-brand-400'}>{BUSINESS.areaServed}</span>
                 </span>
               </FooterLine>
               <FooterLine icon={<Clock className="size-4" />} lux={lux}>
@@ -124,7 +124,7 @@ export function Footer({ tone = 'light' }: FooterProps) {
         </div>
 
         <div
-          className={`mt-12 flex flex-wrap items-center justify-between gap-4 border-t pt-6 text-xs ${lux ? 'border-white/10 text-ivory-faint' : 'border-brand-800 text-brand-400'}`}
+          className={`mt-12 flex flex-wrap items-center justify-between gap-4 border-t pt-6 text-xs ${lux ? 'border-white/10 text-lux-fg-faint' : 'border-brand-800 text-brand-400'}`}
         >
           <p>
             © {new Date().getFullYear()} {BUSINESS.legalName}. All rights reserved.
@@ -145,7 +145,7 @@ function Social({ href, label, children, lux }: { href: string; label: string; c
       aria-label={label}
       className={`tap-target grid place-items-center rounded-lg border no-underline transition-colors ${
         lux
-          ? 'border-white/15 text-ivory-soft hover:border-gold hover:bg-white/5 hover:text-gold'
+          ? 'border-white/15 text-lux-fg-soft hover:border-accent-400 hover:bg-white/5 hover:text-accent-400'
           : 'border-brand-700 text-brand-200 hover:border-accent-400 hover:bg-brand-900 hover:text-accent-400'
       }`}
     >
@@ -157,7 +157,7 @@ function Social({ href, label, children, lux }: { href: string; label: string; c
 function FooterLine({ icon, children, lux }: { icon: ReactNode; children: ReactNode; lux: boolean }) {
   return (
     <li className="flex items-start gap-2.5">
-      <span className={`mt-0.5 shrink-0 ${lux ? 'text-gold/70' : 'text-brand-400'}`}>{icon}</span>
+      <span className={`mt-0.5 shrink-0 ${lux ? 'text-accent-400' : 'text-brand-400'}`}>{icon}</span>
       <span className="min-w-0">{children}</span>
     </li>
   )

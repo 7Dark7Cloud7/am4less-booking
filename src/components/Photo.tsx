@@ -39,7 +39,9 @@ export function Photo({ slot, alt, ratio = '4 / 3', className = '', eager = fals
           className="size-full object-cover"
         />
       )}
-      {scrim === 'dark' && <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />}
+      {scrim === 'dark' && (
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-brand-950/85 via-brand-900/35 to-transparent" />
+      )}
       {scrim === 'brand' && (
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-brand-950/85 via-brand-900/45 to-transparent" />
       )}

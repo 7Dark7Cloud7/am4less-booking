@@ -16,11 +16,11 @@ export function Disciplines() {
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="lux-eyebrow">What we clean</p>
-          <h2 className="mt-5 max-w-[18ch] text-[clamp(2rem,4vw,3.4rem)] font-light text-ivory">
+          <h2 className="mt-5 max-w-[18ch] text-[clamp(2rem,4vw,3.4rem)] font-light text-lux-fg">
             Built for every building.
           </h2>
         </div>
-        <Link to="/services" className="lux-link text-ivory-faint hover:text-gold">
+        <Link to="/services" className="lux-link text-lux-fg-faint hover:text-accent-400">
           All {BOOKABLE.length} services
           <ArrowUpRight className="size-4" aria-hidden="true" />
         </Link>
@@ -40,9 +40,9 @@ export function Disciplines() {
               className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             <div className="absolute inset-x-0 bottom-0 p-6">
-              <span aria-hidden="true" className="mb-4 block h-px w-10 bg-gold" />
-              <h3 className="text-2xl font-normal text-ivory">{tile.kicker}</h3>
-              <p className="mt-2 text-sm text-ivory-soft">{tile.line}</p>
+              <span aria-hidden="true" className="mb-4 block h-px w-10 bg-accent-400" />
+              <h3 className="text-2xl font-normal text-lux-fg">{tile.kicker}</h3>
+              <p className="mt-2 text-sm text-lux-fg-soft">{tile.line}</p>
             </div>
           </Link>
         ))}

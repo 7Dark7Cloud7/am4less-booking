@@ -95,8 +95,8 @@ export function Chapters() {
     <section className="mx-auto max-w-[84rem] px-5 py-8 sm:px-8 lg:px-12">
       <div className="max-w-2xl">
         <p className="lux-eyebrow">Service disciplines</p>
-        <h2 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] font-light text-ivory">Tailored to the work.</h2>
-        <p className="mt-5 leading-relaxed text-ivory-soft">
+        <h2 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] font-light text-lux-fg">Tailored to the work.</h2>
+        <p className="mt-5 leading-relaxed text-lux-fg-soft">
           Every line below is quoted after a walkthrough, never over the phone — because the building decides the crew,
           the hours and the detail, not a rate sheet.
         </p>

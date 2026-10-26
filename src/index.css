@@ -48,21 +48,17 @@
   --color-danger: oklch(0.51 0.19 25);
 
   /* ── editorial world (home page) ─────────────────────────────────────────
-     A separate, deliberately dark palette: obsidian ground, warm ivory text,
-     champagne gold for emphasis. Scoped by .lux so the rest of the app keeps
-     its light commercial look. */
-  --color-obsidian: #121214;
-  --color-soft-black: #1a1a1e;
-  --color-charcoal: #242429;
-  --color-ivory: #f5f2eb;
-  --color-ivory-soft: #bdb9ae;
-  --color-ivory-faint: #8e8e93;
-  --color-gold: #c9a45c;
-  --color-gold-soft: #e2c891;
-  --color-gold-deep: #8a6a2f;
+     The same badge palette as the rest of the app — royal navy ground, cool
+     white text, logo-red emphasis — scoped by .lux so the commercial pages
+     keep their light surface set. */
+  --color-lux-base: oklch(0.168 0.075 267);
+  --color-lux-raise: oklch(0.225 0.095 266);
+  --color-lux-fg: oklch(0.985 0.004 266);
+  --color-lux-fg-soft: oklch(0.855 0.02 266);
+  --color-lux-fg-faint: oklch(0.735 0.024 266);
 
-  --font-lux: 'Plus Jakarta Sans', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-lux-display: 'Outfit', 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-lux: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-lux-display: 'Sora', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1rem;
   --radius-field: 0.6875rem;
@@ -245,8 +241,8 @@
 
   /* ── editorial world ──────────────────────────────────────────────────── */
   .lux {
-    background: var(--color-obsidian);
-    color: var(--color-ivory);
+    background: var(--color-lux-base);
+    color: var(--color-lux-fg);
     font-family: var(--font-lux);
   }
 
@@ -258,8 +254,8 @@
   }
 
   .lux ::selection {
-    background: var(--color-gold);
-    color: var(--color-obsidian);
+    background: var(--color-accent-600);
+    color: var(--color-lux-fg);
   }
 
   .lux-eyebrow {
@@ -267,7 +263,7 @@
     font-weight: 600;
     letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--color-accent-400);
   }
 
   @media (max-width: 40rem) {
@@ -276,10 +272,37 @@
     }
   }
 
+  /* One hairline carrying both badge colours: red into royal blue. */
   .lux-rule {
     height: 1px;
-    background: linear-gradient(90deg, var(--color-gold), transparent 55%);
-    opacity: 0.5;
+    background: linear-gradient(90deg, var(--color-accent-500), var(--color-brand-400) 55%, transparent 85%);
+    opacity: 0.75;
+  }
+
+  /* Hero photo scrim keyed to the navy ground, not a neutral black. */
+  .lux-hero-scrim {
+    background: linear-gradient(
+      to top,
+      var(--color-lux-base) 2%,
+      color-mix(in oklab, var(--color-lux-base) 78%, transparent) 42%,
+      color-mix(in oklab, var(--color-lux-base) 40%, transparent) 100%
+    );
+  }
+
+  .lux-glow-blue {
+    background: radial-gradient(
+      115% 75% at 50% -10%,
+      color-mix(in oklab, var(--color-brand-500) 38%, transparent),
+      transparent 62%
+    );
+  }
+
+  .lux-glow-red {
+    background: radial-gradient(
+      90% 120% at 15% 0%,
+      color-mix(in oklab, var(--color-accent-500) 26%, transparent),
+      transparent 60%
+    );
   }
 
   /* Thumb-size hit area that still reads as a text link. */
@@ -292,7 +315,7 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-ivory);
+    color: var(--color-lux-fg);
     text-decoration: none;
   }
 }

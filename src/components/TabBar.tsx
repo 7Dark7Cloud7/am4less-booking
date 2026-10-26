@@ -21,7 +21,7 @@ export function TabBar() {
     <nav
       aria-label="Primary"
       className={`fixed inset-x-0 bottom-0 z-40 border-t backdrop-blur-lg shadow-[var(--shadow-bar)] lg:hidden ${
-        lux ? 'border-white/10 bg-obsidian/95' : 'border-line bg-surface/95'
+        lux ? 'border-white/10 bg-lux-base/95' : 'border-line bg-surface/95'
       }`}
       style={{ paddingBottom: 'var(--spacing-safe-bottom)' }}
     >
@@ -36,7 +36,7 @@ export function TabBar() {
             aria-label="Get a free quote"
             aria-current={onBook ? 'page' : undefined}
             className={`flex size-[60px] items-center justify-center rounded-full shadow-[var(--shadow-lift)] transition-transform active:translate-y-0.5 ${
-              lux ? 'bg-gold text-obsidian' : 'bg-brand-600 text-white dark:bg-brand-500'
+              lux ? 'bg-accent-700 text-white' : 'bg-brand-600 text-white dark:bg-brand-500'
             }`}
           >
             <CalendarPlus className="size-7" aria-hidden="true" />
@@ -50,12 +50,12 @@ export function TabBar() {
             href={BUSINESS.phoneHref}
             aria-label={`Call ${BUSINESS.phoneDisplay}`}
             className={`flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline ${
-              lux ? 'text-ivory-soft active:text-gold' : 'text-ink-soft active:text-brand-600'
+              lux ? 'text-lux-fg-soft active:text-accent-400' : 'text-ink-soft active:text-brand-600'
             }`}
           >
             <span
               className={`grid size-7 place-items-center rounded-full ${
-                lux ? 'bg-gold/15 text-gold' : 'bg-accent-600/12 text-accent-600 dark:text-accent-400'
+                lux ? 'bg-accent-500/20 text-accent-300' : 'bg-accent-600/12 text-accent-600 dark:text-accent-400'
               }`}
             >
               <Phone className="size-4" aria-hidden="true" />
@@ -87,7 +87,7 @@ function Tab({
         to={to}
         end={end}
         className={({ isActive }) => {
-          if (lux) return `flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline ${isActive ? 'text-gold' : 'text-ivory-faint active:text-ivory'}`
+          if (lux) return `flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline ${isActive ? 'text-accent-300' : 'text-lux-fg-faint active:text-lux-fg'}`
           return `flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline transition-colors ${
             isActive ? 'text-brand-700 dark:text-brand-300' : 'text-ink-soft active:text-brand-600 dark:text-ink-soft'
           }`
@@ -97,7 +97,7 @@ function Tab({
           <>
             <span
               className={`grid size-7 place-items-center rounded-full transition-colors ${
-                lux ? (isActive ? 'bg-gold/15' : '') : isActive ? 'bg-brand-600/12 dark:bg-brand-400/20' : ''
+                lux ? (isActive ? 'bg-accent-500/20' : '') : isActive ? 'bg-brand-600/12 dark:bg-brand-400/20' : ''
               }`}
             >
               <Icon className="size-5" aria-hidden="true" />

@@ -56,7 +56,8 @@ component or E2E runner, so browser QA is still required (checklist in `HANDOFF.
   visible focus ring, labels on every input, `aria-live` on wizard status, no horizontal scroll at 320 px.
 - Never hand-edit `src/domain/photos.generated.ts` (generated) and never add `/photos/**` back into the
   service worker precache (it blocks install; they are runtime-cached instead).
-- The home page runs in the `.lux` world (`obsidian`/`ivory`/`gold` tokens, Outfit + Plus Jakarta Sans).
+- The home page runs in the `.lux` world (`lux-base`/`lux-raise`/`lux-fg` tokens, Sora + Public Sans,
+  accent red for emphasis — the badge palette, no borrowed colours).
   It is scoped to `/` only — `Header`/`Footer`/`MobileNav`/`TabBar` take a `lux` tone, everything else keeps
   the light commercial shell. Do not use `lux` tokens in the booking flow, and never publish a price from it.
 - Native builds must not ship a service worker: `npm run build:native` runs `vite build --mode native`, which
