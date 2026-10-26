@@ -1,13 +1,15 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-type Variant = 'primary' | 'accent' | 'outline' | 'ghost' | 'onDark' | 'outlineOnDark' | 'danger'
+type Variant = 'primary' | 'accent' | 'outline' | 'ghost' | 'onDark' | 'outlineOnDark' | 'danger' | 'gold'
 type Size = 'sm' | 'md' | 'lg'
 
 const VARIANTS: Record<Variant, string> = {
   primary:
     'bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 dark:bg-brand-400 dark:text-brand-950 dark:hover:bg-brand-300',
   accent: 'bg-accent-600 text-white hover:bg-accent-700 active:bg-accent-800 font-bold',
+  /** Editorial surfaces: champagne gold on obsidian, dark ink for AA contrast. */
+  gold: 'bg-gold text-obsidian hover:bg-gold-soft active:bg-gold-soft font-semibold tracking-wide',
   outline:
     'bg-surface text-ink border border-line-strong hover:border-brand-400 hover:bg-surface-muted dark:bg-transparent',
   ghost: 'bg-transparent text-ink hover:bg-surface-muted',

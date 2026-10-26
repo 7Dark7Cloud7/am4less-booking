@@ -14,6 +14,7 @@ Source: **https://github.com/7Dark7Cloud7/am4less-booking** (public)
 - Lead capture with zero backend: leads are stored on-device and handed off via WhatsApp / SMS / email, or POSTed to an optional webhook
 - Job-plan output instead of prices: crew size, labour hours on site, visit cadence
 - Installable PWA (Android/iOS), dark/light themes, gallery of the company's real job photos
+- Editorial dark home page; optional Capacitor Android wrapper (`npm run native:apk`)
 
 ## Quick start
 
@@ -24,6 +25,8 @@ npm run typecheck  # tsc --noEmit
 npm run test       # vitest run — the domain rules suite (src/domain/*.test.ts)
 npm run build      # typecheck + production build to dist/
 npm run preview    # serve the built app
+
+npm run native:apk # build + sync + assembleDebug (needs JDK 21 + Android SDK)
 ```
 
 Node 20.19+ or 22.12+ required (Vite 7).

@@ -12,3 +12,7 @@ dev-dist
 Thumbs.db
 *.local
 *.log
+
+# Capacitor native shells — regenerate with `npm run native:add`
+/android
+/ios

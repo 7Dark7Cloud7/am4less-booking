@@ -15,16 +15,19 @@ const TABS = [
 export function TabBar() {
   const { pathname } = useLocation()
   const onBook = pathname.startsWith('/book')
+  const lux = pathname === '/'
 
   return (
     <nav
       aria-label="Primary"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 backdrop-blur-lg shadow-[var(--shadow-bar)] lg:hidden"
+      className={`fixed inset-x-0 bottom-0 z-40 border-t backdrop-blur-lg shadow-[var(--shadow-bar)] lg:hidden ${
+        lux ? 'border-white/10 bg-obsidian/95' : 'border-line bg-surface/95'
+      }`}
       style={{ paddingBottom: 'var(--spacing-safe-bottom)' }}
     >
       <ul className="mx-auto flex max-w-md items-stretch justify-between px-2">
         {TABS.slice(0, 2).map((tab) => (
-          <Tab key={tab.to} {...tab} />
+          <Tab key={tab.to} {...tab} lux={lux} />
         ))}
 
         <li className="relative -mt-6 flex w-[26%] justify-center">
@@ -32,21 +35,29 @@ export function TabBar() {
             to="/book"
             aria-label="Get a free quote"
             aria-current={onBook ? 'page' : undefined}
-            className="flex size-[60px] items-center justify-center rounded-full bg-brand-600 text-white shadow-[var(--shadow-lift)] transition-transform active:translate-y-0.5 dark:bg-brand-500"
+            className={`flex size-[60px] items-center justify-center rounded-full shadow-[var(--shadow-lift)] transition-transform active:translate-y-0.5 ${
+              lux ? 'bg-gold text-obsidian' : 'bg-brand-600 text-white dark:bg-brand-500'
+            }`}
           >
             <CalendarPlus className="size-7" aria-hidden="true" />
             <span className="sr-only">Quote</span>
           </NavLink>
         </li>
 
-        <Tab {...TABS[2]!} />
+        <Tab {...TABS[2]!} lux={lux} />
         <li className="w-[26%]">
           <a
             href={BUSINESS.phoneHref}
             aria-label={`Call ${BUSINESS.phoneDisplay}`}
-            className="flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold text-ink-soft no-underline active:text-brand-600"
+            className={`flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline ${
+              lux ? 'text-ivory-soft active:text-gold' : 'text-ink-soft active:text-brand-600'
+            }`}
           >
-            <span className="grid size-7 place-items-center rounded-full bg-accent-600/12 text-accent-600 dark:text-accent-400">
+            <span
+              className={`grid size-7 place-items-center rounded-full ${
+                lux ? 'bg-gold/15 text-gold' : 'bg-accent-600/12 text-accent-600 dark:text-accent-400'
+              }`}
+            >
               <Phone className="size-4" aria-hidden="true" />
             </span>
             Call
@@ -57,25 +68,36 @@ export function TabBar() {
   )
 }
 
-function Tab({ to, label, icon: Icon, end }: { to: string; label: string; icon: typeof Home; end: boolean }) {
+function Tab({
+  to,
+  label,
+  icon: Icon,
+  end,
+  lux
+}: {
+  to: string
+  label: string
+  icon: typeof Home
+  end: boolean
+  lux: boolean
+}) {
   return (
     <li className="w-[26%]">
       <NavLink
         to={to}
         end={end}
-        className={({ isActive }) =>
-          `flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline transition-colors ${
-            isActive
-              ? 'text-brand-700 dark:text-brand-300'
-              : 'text-ink-soft active:text-brand-600 dark:text-ink-soft'
+        className={({ isActive }) => {
+          if (lux) return `flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline ${isActive ? 'text-gold' : 'text-ivory-faint active:text-ivory'}`
+          return `flex h-full flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold no-underline transition-colors ${
+            isActive ? 'text-brand-700 dark:text-brand-300' : 'text-ink-soft active:text-brand-600 dark:text-ink-soft'
           }`
-        }
+        }}
       >
         {({ isActive }) => (
           <>
             <span
               className={`grid size-7 place-items-center rounded-full transition-colors ${
-                isActive ? 'bg-brand-600/12 dark:bg-brand-400/20' : ''
+                lux ? (isActive ? 'bg-gold/15' : '') : isActive ? 'bg-brand-600/12 dark:bg-brand-400/20' : ''
               }`}
             >
               <Icon className="size-5" aria-hidden="true" />

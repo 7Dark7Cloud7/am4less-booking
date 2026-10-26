@@ -14,7 +14,7 @@ send it to the crew — no account, no card, no backend required.
 - **Source control:** https://github.com/7Dark7Cloud7/am4less-booking (**public**) — `main`, full app + `photos-src/`
 - **Live production:** https://am4less-booking.vercel.app (Vercel project `am4less-booking`, team `7dark7cloud7s-projects`)
 - **Company domain:** `am4less.com` still points at the old Duda site. DNS was deliberately **not** switched — that is a business decision pending the owner (see §10).
-- **Build status:** typecheck, 72 domain tests, production build all clean; deployed and smoke-tested.
+- **Build status:** typecheck, the 72-test domain suite and the production build are all clean on `main` (CI green on every commit). Live Vercel build is one step behind `main` — it predates the "monthly cadence" copy fix; redeploy with §9 to publish it.
 
 ### Routes
 
@@ -173,11 +173,20 @@ Apps Script, Supabase Edge Function, custom API). A future backend only needs to
 | Crew-sizing heuristics | `src/domain/estimate.ts` (`jobPlanFor`, `TARGET_SHIFT`) |
 | Photo slots used by pages | `src/domain/media.ts` (`SLOT_SLUGS`) |
 | Brand colours, fonts, base styles | `src/index.css` |
-| Nav items (header + mobile tab bar) | `src/components/Header.tsx`, `src/components/TabBar.tsx` |
+| Home page composition (editorial sections) | `src/pages/Home.tsx` + `src/components/home/*` |
+| Editorial palette/typography (`obsidian`, `ivory`, `gold`) | `src/index.css` → `@theme` + `.lux` classes; **home only** |
+| Nav items (header + mobile tab bar) | `src/components/nav.ts`, `Header.tsx`, `MobileNav.tsx`, `TabBar.tsx` |
 | PWA manifest, icons, shortcuts, caching | `vite.config.ts` |
 | Routes | `src/App.tsx` |
 | Domain rule tests (bookability, no-prices, crew maths) | `src/domain/*.test.ts` |
 | Test runner config | `vitest.config.ts` (node environment, `src/**/*.test.ts`) |
+
+The home page is deliberately a different visual world from the rest of the app: a dark editorial
+composition (`.lux` scope) built from `src/components/home/*` — hero, ticker, disciplines, five service
+chapters, standard, pillars, coverage, closing. It uses only real domain content (service detail bullets,
+`jobPlanFor` crew sizing, published hours and coverage) and no prices. `Header`, `Footer`, `MobileNav` and
+`TabBar` take a `lux`/`light` tone; the other pages keep the light commercial shell. Keep the `.lux`
+tokens scoped to the home page — do not restyle the booking flow with them.
 
 ---
 
@@ -212,6 +221,26 @@ Configured in `vite.config.ts` (`vite-plugin-pwa`, `generateSW`):
 - Offline: app shell works offline; `/photos/` images appear once viewed.
 - Manifest: standalone, portrait, shortcuts for **Book / Gallery / My bookings**, `id`, maskable icons.
 - `sw.js` and `registerSW.js` are served with `must-revalidate` (see `vercel.json` + `public/_headers`) so update prompts actually fire.
+
+### Native shell (Capacitor)
+
+The same codebase also builds as an Android app. Capacitor is already configured (`capacitor.config.ts`,
+appId `com.am4less.booking`); the generated `android/` project is **gitignored** and rebuilt on demand.
+
+```bash
+npm run native:add     # first time on a machine: build + `cap add android`
+npm run native:sync    # copy the web build into the native project
+npm run native:apk     # assembleDebug -> android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+- Requires JDK 21 and the Android SDK (`ANDROID_HOME`); Android Studio's bundled JBR works
+  (`C:/Program Files/Android/Android Studio/jbr`).
+- `npm run build:native` is `vite build --mode native`, which **skips `vite-plugin-pwa`**. A precached
+  `/index.html` inside the WebView keeps serving the old bundle after an APK update — that is why the
+  service worker is disabled in native builds. Do not re-enable it.
+- `vite.config.ts` sets `base: './'` so assets resolve from `file://`/`https://localhost`.
+- The debug APK is unsigned for distribution; a Play Store build needs the owner's keystore
+  (`assembleRelease` + signing config). Changing `appId` after release creates a second app on the store.
 
 ---
 

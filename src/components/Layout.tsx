@@ -21,8 +21,11 @@ export function Layout() {
   const { pathname } = useLocation()
   useReveal([pathname])
 
+  // The wizard owns the bottom of the screen on phones; two stacked bars fight for thumb space.
+  const inFlow = pathname.startsWith('/book')
+
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className={`flex min-h-dvh flex-col ${inFlow ? '' : 'tabbar-clearance'}`}>
       <a
         href="#main"
         className="fixed top-2 left-2 z-[60] -translate-y-[200%] rounded-lg bg-brand-700 px-5 py-3 font-semibold text-white no-underline focus:translate-y-0"
@@ -30,12 +33,12 @@ export function Layout() {
         Skip to content
       </a>
       <ScrollToTop />
-      <Header />
+      <Header overlay={pathname === '/'} />
       <main id="main" className="flex-1">
         <Outlet />
       </main>
-      <Footer />
-      <TabBar />
+      <Footer tone={pathname === '/' ? 'lux' : 'light'} />
+      {!inFlow && <TabBar />}
     </div>
   )
 }

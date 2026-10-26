@@ -6,8 +6,11 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 function isStandalone(): boolean {
+  // Inside a Capacitor shell the app already IS the installed app — an "Install" button is nonsense.
+  const isNativeShell = (window as unknown as { Capacitor?: unknown }).Capacitor !== undefined
   const iosStandalone = (navigator as unknown as { standalone?: boolean }).standalone === true
   return (
+    isNativeShell ||
     window.matchMedia('(display-mode: standalone)').matches ||
     window.matchMedia('(display-mode: window-controls-overlay)').matches ||
     iosStandalone

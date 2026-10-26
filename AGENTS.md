@@ -13,6 +13,11 @@ npm run test        # vitest run — domain rules suite, must stay green
 npm run build       # typecheck + vite build -> dist/
 npm run photos      # rebuild photo assets + photos.generated.ts from photos-src/
 npm run icons       # regenerate PWA icons from public/brand/logo-am4less.webp
+
+# Native Android shell (Capacitor). Needs JDK 21 + Android SDK; android/ is gitignored.
+npm run native:add    # first time: build:native + cap add android
+npm run native:sync   # build:native + cap sync
+npm run native:apk    # debug APK at android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 CI (`.github/workflows/ci.yml`) runs `npm ci` → `typecheck` → `test` → `build` on every push and PR, then fails
@@ -51,6 +56,11 @@ component or E2E runner, so browser QA is still required (checklist in `HANDOFF.
   visible focus ring, labels on every input, `aria-live` on wizard status, no horizontal scroll at 320 px.
 - Never hand-edit `src/domain/photos.generated.ts` (generated) and never add `/photos/**` back into the
   service worker precache (it blocks install; they are runtime-cached instead).
+- The home page runs in the `.lux` world (`obsidian`/`ivory`/`gold` tokens, Outfit + Plus Jakarta Sans).
+  It is scoped to `/` only — `Header`/`Footer`/`MobileNav`/`TabBar` take a `lux` tone, everything else keeps
+  the light commercial shell. Do not use `lux` tokens in the booking flow, and never publish a price from it.
+- Native builds must not ship a service worker: `npm run build:native` runs `vite build --mode native`, which
+  skips `vite-plugin-pwa`. A precached `/index.html` in a Capacitor WebView survives APK updates.
 
 ## Deploy gotchas
 

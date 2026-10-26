@@ -47,6 +47,23 @@
   --color-warning: oklch(0.62 0.14 78);
   --color-danger: oklch(0.51 0.19 25);
 
+  /* ── editorial world (home page) ─────────────────────────────────────────
+     A separate, deliberately dark palette: obsidian ground, warm ivory text,
+     champagne gold for emphasis. Scoped by .lux so the rest of the app keeps
+     its light commercial look. */
+  --color-obsidian: #121214;
+  --color-soft-black: #1a1a1e;
+  --color-charcoal: #242429;
+  --color-ivory: #f5f2eb;
+  --color-ivory-soft: #bdb9ae;
+  --color-ivory-faint: #8e8e93;
+  --color-gold: #c9a45c;
+  --color-gold-soft: #e2c891;
+  --color-gold-deep: #8a6a2f;
+
+  --font-lux: 'Plus Jakarta Sans', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-lux-display: 'Outfit', 'Sora', ui-sans-serif, system-ui, sans-serif;
+
   --radius-card: 1rem;
   --radius-field: 0.6875rem;
 
@@ -55,6 +72,10 @@
   --shadow-bar: 0 -6px 24px -8px oklch(0.2 0.02 258 / 0.22);
 
   --spacing-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --spacing-safe-top: env(safe-area-inset-top, 0px);
+
+  /* the fixed bottom TabBar: 28px icon + 4px gap + caption + 2x 8px padding */
+  --app-tabbar-height: 4rem;
 }
 
 [data-theme='dark'] {
@@ -204,6 +225,100 @@
   .tap-target {
     min-height: 2.875rem;
     min-width: 2.875rem;
+  }
+
+  /* Sticky app chrome must paint behind the status bar / notch, not under it. */
+  .safe-area-top {
+    padding-top: var(--spacing-safe-top);
+  }
+
+  /* The TabBar floats over the page below lg, so the last block of the page needs room. */
+  .tabbar-clearance {
+    padding-bottom: calc(var(--app-tabbar-height) + var(--spacing-safe-bottom));
+  }
+
+  @media (min-width: 64rem) {
+    .tabbar-clearance {
+      padding-bottom: 0;
+    }
+  }
+
+  /* ── editorial world ──────────────────────────────────────────────────── */
+  .lux {
+    background: var(--color-obsidian);
+    color: var(--color-ivory);
+    font-family: var(--font-lux);
+  }
+
+  .lux :is(h1, h2, h3, h4) {
+    font-family: var(--font-lux-display);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+
+  .lux ::selection {
+    background: var(--color-gold);
+    color: var(--color-obsidian);
+  }
+
+  .lux-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  @media (max-width: 40rem) {
+    .lux-eyebrow {
+      letter-spacing: 0.24em;
+    }
+  }
+
+  .lux-rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-gold), transparent 55%);
+    opacity: 0.5;
+  }
+
+  /* Thumb-size hit area that still reads as a text link. */
+  .lux-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+    text-decoration: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
   }
 }
 

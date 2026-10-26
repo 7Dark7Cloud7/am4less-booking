@@ -21,7 +21,7 @@ export function EstimatePanel({
   return (
     <aside
       aria-live="polite"
-      className="card-surface sticky top-[5.5rem] p-5"
+      className="card-surface p-5 lg:sticky lg:top-[5.5rem]"
       style={{ background: 'var(--color-surface-raised)' }}
     >
       <h2 className="flex items-center gap-2 text-base font-bold">

@@ -10,6 +10,7 @@ import { ScheduleStep } from '../components/booking/ScheduleStep'
 import { DetailsStep } from '../components/booking/DetailsStep'
 import { ReviewStep } from '../components/booking/ReviewStep'
 import { EstimatePanel } from '../components/booking/EstimatePanel'
+import { PlanBar } from '../components/booking/PlanBar'
 import { SuccessPanel } from '../components/booking/SuccessPanel'
 import { Button } from '../components/Button'
 import { useReveal } from '../hooks/useReveal'
@@ -18,7 +19,7 @@ import type { Booking } from '../domain/types'
 const STEP_PROMPTS: Record<StepIndex, { title: string; sub: string }> = {
   0: {
     title: 'What are we cleaning?',
-    sub: 'Size and scope decide the crew we send. Your job plan updates on the side as you tap.'
+    sub: 'Size and scope decide the crew we send. The job plan follows you down the page as you tap.'
   },
   1: { title: 'When do you need us?', sub: 'Recurring slots let us pre-stage equipment and hold your crew.' },
   2: {
@@ -107,7 +108,7 @@ export function BookPage() {
             </div>
           )}
 
-          <div className="mt-8 flex items-center gap-3 border-t border-line pt-6">
+          <div className="mt-8 hidden items-center gap-3 border-t border-line pt-6 lg:flex">
             {step > 0 && (
               <Button variant="outline" onClick={back} iconLeft={<ArrowLeft className="size-4" aria-hidden="true" />}>
                 Back
@@ -118,8 +119,18 @@ export function BookPage() {
                 Continue
               </Button>
             )}
-            <p className="ms-auto hidden text-xs text-ink-faint sm:block">Autosaved on this device</p>
+            <p className="ms-auto text-xs text-ink-faint">Autosaved on this device</p>
           </div>
+
+          <PlanBar
+            plan={plan}
+            estimate={estimate}
+            serviceCount={draft.serviceIds.length}
+            step={step}
+            lastStep={STEPS.length - 1}
+            onBack={back}
+            onNext={() => void next()}
+          />
         </section>
 
         <EstimatePanel plan={plan} estimate={estimate} frequency={draft.frequency} serviceCount={draft.serviceIds.length} />
