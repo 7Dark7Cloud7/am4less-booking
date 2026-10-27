@@ -52,9 +52,7 @@ export const GALLERY_FILTERS: { id: GalleryCat | 'all'; label: string }[] = [
 /** Category id -> photo, so `/services` and the booking wizard stay in sync. */
 export const CATEGORY_PHOTO: Record<string, PhotoKey> = {
   recurring: 'heroCrew',
-  construction: 'postConstruction',
   event: 'eventSetup',
-  logistics: 'floorCare',
   deep: 'specialtyOps',
   moveout: 'moveOut'
 }

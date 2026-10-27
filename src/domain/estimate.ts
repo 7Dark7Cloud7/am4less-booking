@@ -32,8 +32,6 @@ export const PROPERTY_MULTIPLIER: Record<PropertyType, number> = {
   school: 1.1,
   medical: 1.18,
   warehouse: 1.05,
-  residence: 0.92,
-  'construction-site': 1.12,
   'event-venue': 1.06
 }
 
@@ -43,9 +41,11 @@ export const PROPERTY_LABELS: Record<PropertyType, string> = {
   school: 'School or daycare',
   medical: 'Medical or dental facility',
   warehouse: 'Warehouse or industrial',
-  residence: 'Home or apartment',
-  'construction-site': 'Construction / renovation site',
   'event-venue': 'Event or banquet venue'
+}
+
+export function isPropertyType(value: unknown): value is PropertyType {
+  return typeof value === 'string' && value in PROPERTY_LABELS
 }
 
 export const FREQUENCY_LABELS: Record<Frequency, string> = {

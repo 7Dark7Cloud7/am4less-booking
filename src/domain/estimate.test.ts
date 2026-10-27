@@ -6,7 +6,7 @@ import type { Estimate } from './types'
  * estimateFor() is the internal costing model: it feeds the owner's webhook payload only.
  * Nothing here is rendered while PUBLIC_PRICING is false — see pricing-rules.test.ts.
  */
-function totalOf(ids: string[], addons: string[] = [], sqft: number | null = 10000, property: 'office' | 'medical' | 'residence' | 'retail' = 'office', frequency: 'once' | 'weekly' = 'once'): Estimate {
+function totalOf(ids: string[], addons: string[] = [], sqft: number | null = 10000, property: 'office' | 'medical' | 'warehouse' | 'retail' = 'office', frequency: 'once' | 'weekly' = 'once'): Estimate {
   return estimateFor(ids, addons, sqft, property, frequency)
 }
 
@@ -30,11 +30,11 @@ describe('estimateFor — pricing models', () => {
 
   it('weights labour by property type', () => {
     expect(totalOf(['rec-office'], [], 10000, 'medical').total).toBe(826)
-    expect(totalOf(['rec-office'], [], 10000, 'residence').total).toBe(644)
+    expect(totalOf(['rec-office'], [], 10000, 'warehouse').total).toBe(735)
   })
 
   it('prices an hourly line on its duration', () => {
-    expect(totalOf(['rec-residential'], [], null).total).toBe(192) // $48/hr x 4 hrs
+    expect(totalOf(['evt-setup'], [], null).total).toBe(372) // $62/hr x 6 hrs
   })
 
   it('prices a flat line once per visit', () => {
@@ -49,7 +49,7 @@ describe('estimateFor — pricing models', () => {
   })
 
   it('sends a quote-only line to a site survey instead of a number', () => {
-    const e = totalOf(['con-fixture'], [], null)
+    const e = totalOf(['deep-hvac'], [], null)
     expect(e.needsSiteVisit).toBe(true)
     expect(e.total).toBe(0)
     expect(e.lines[0]?.basis).toContain('site survey')

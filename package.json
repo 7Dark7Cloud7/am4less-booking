@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "AM4LESS - commercial & residential cleaning: online booking, instant estimates, lead capture.",
+  "description": "AM4LESS - commercial cleaning: online booking, instant estimates, lead capture.",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

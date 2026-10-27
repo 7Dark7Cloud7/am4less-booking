@@ -20,12 +20,11 @@ function ScrollToTop() {
 export function Layout() {
   const { pathname } = useLocation()
   useReveal([pathname])
-
-  // The wizard owns the bottom of the screen on phones; two stacked bars fight for thumb space.
-  const inFlow = pathname.startsWith('/book')
+  /** The wizard owns the bottom of the screen: PlanBar carries Back/Continue/Call there. */
+  const inWizard = pathname.startsWith('/book')
 
   return (
-    <div className={`flex min-h-dvh flex-col ${inFlow ? '' : 'tabbar-clearance'}`}>
+    <div className="am4-app">
       <a
         href="#main"
         className="fixed top-2 left-2 z-[60] -translate-y-[200%] rounded-lg bg-brand-700 px-5 py-3 font-semibold text-white no-underline focus:translate-y-0"
@@ -33,12 +32,14 @@ export function Layout() {
         Skip to content
       </a>
       <ScrollToTop />
-      <Header overlay={pathname === '/'} />
-      <main id="main" className="flex-1">
-        <Outlet />
-      </main>
-      <Footer tone={pathname === '/' ? 'lux' : 'light'} />
-      {!inFlow && <TabBar />}
+      <div className={inWizard ? 'am4-main' : 'am4-main tabbar-clearance'}>
+        <Header />
+        <main id="main" className="flex-1">
+          <Outlet />
+        </main>
+        <Footer tone="light" hideOnMobile={inWizard} />
+      </div>
+      {!inWizard && <TabBar />}
     </div>
   )
 }

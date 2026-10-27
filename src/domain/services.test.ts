@@ -3,19 +3,32 @@ import { CATEGORIES } from './categories'
 import { BOOKABLE, SERVICES, SERVICE_BY_ID, isBookable, servicesInCategory } from './services'
 
 /**
- * The nine lines the owner sells online (HANDOFF.md section 3a). Adding a line here
+ * The seven lines the owner sells online (HANDOFF.md section 3a). Adding a line here
  * is a business decision, not a code change — if this test fails, ask the owner first.
  */
 const BOOKABLE_IDS: string[] = [
   'rec-office',
   'rec-floor',
-  'rec-residential',
   'rec-medical',
-  'con-dust',
   'evt-rapid',
   'deep-upholstery',
   'deep-pressure',
   'mov-deep'
+]
+
+/**
+ * Retired on 2026-10-27: the owner no longer markets post-construction, transport or
+ * residential/apartment work. None of these ids may come back without the owner.
+ */
+const RETIRED_IDS = [
+  'con-dust',
+  'con-furniture',
+  'con-fixture',
+  'log-supplies',
+  'log-haul',
+  'log-rental',
+  'rec-residential',
+  'rec-apartment'
 ]
 
 describe('catalogue integrity', () => {
@@ -38,11 +51,19 @@ describe('catalogue integrity', () => {
       expect(servicesInCategory(category.id).length, category.id).toBeGreaterThan(0)
     }
   })
+
+  it('lists only the four categories the owner sells', () => {
+    expect(CATEGORIES.map((c) => c.id)).toEqual(['recurring', 'event', 'deep', 'moveout'])
+  })
+
+  it('has dropped the retired lines from the catalogue entirely', () => {
+    for (const id of RETIRED_IDS) expect(SERVICE_BY_ID.has(id), id).toBe(false)
+  })
 })
 
 describe('bookability — only cleaning lines are bookable', () => {
-  it('exposes exactly nine bookable services', () => {
-    expect(BOOKABLE.length).toBe(9)
+  it('exposes exactly seven bookable services', () => {
+    expect(BOOKABLE.length).toBe(7)
   })
 
   it('exposes exactly the agreed ids', () => {
@@ -51,7 +72,7 @@ describe('bookability — only cleaning lines are bookable', () => {
 
   it('marks everything else coming soon', () => {
     const gated = SERVICES.filter((s) => !BOOKABLE_IDS.includes(s.id))
-    expect(gated.length).toBe(SERVICES.length - 9)
+    expect(gated.length).toBe(SERVICES.length - 7)
     for (const service of gated) {
       expect(service.comingSoon, service.id).toBe(true)
     }
@@ -70,7 +91,7 @@ describe('bookability — only cleaning lines are bookable', () => {
   })
 
   it('keeps every bookable line a real cleaning scope', () => {
-    const nonCleaning = ['log-supplies', 'log-haul', 'log-rental', 'evt-setup', 'evt-led']
+    const nonCleaning = ['evt-setup', 'evt-led']
     for (const id of nonCleaning) expect(isBookable(id), id).toBe(false)
   })
 })

@@ -2,7 +2,8 @@ import { ArrowRight, Award, Briefcase, GraduationCap, Users } from 'lucide-react
 import { BUSINESS, CORE_VALUES } from '../domain/business'
 import { BOOKABLE } from '../domain/services'
 import { LinkButton, RouteButton } from '../components/Button'
-import { Callout, CheckItem, IconTile, Pill, SectionHeading } from '../components/ui'
+import { Callout, CheckItem, IconTile, SectionHeading } from '../components/ui'
+import { PageHero } from '../components/PageHero'
 
 const MODULES = [
   {
@@ -15,7 +16,7 @@ const MODULES = [
   },
   {
     title: 'Specialty operations',
-    body: `Every line on our catalogue taught as a working scope — the ${BOOKABLE.length} you can book today plus the specialty crews we are certifying next: post-construction handover, event turnaround, exterior pressure washing, upholstery extraction, HVAC and kitchen exhaust.`
+    body: `Every line on our catalogue taught as a working scope — the ${BOOKABLE.length} you can book today plus the specialty crews we are certifying next: event turnaround, exterior pressure washing, upholstery extraction, HVAC and kitchen exhaust.`
   },
   {
     title: 'Infection control & compliance',
@@ -40,18 +41,12 @@ const OUTCOMES = [
 
 export function TrainingPage() {
   return (
-    <>
-      <section className="bg-inverse py-16 text-inverse-ink">
-        <div className="mx-auto max-w-5xl px-[clamp(1rem,0.5rem+2vw,2rem)]">
-          <Pill tone="onDark">AM4LESS Commercial Cleaning Mastery Program</Pill>
-          <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-bold sm:text-5xl">
-            Turn workers into business-ready professionals
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-brand-100">
-            A training track for crew members who want more than a hourly rate — and for clients who want to know the
-            person cleaning their building was taught, not just hired.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+    <div className="am4-route">
+      <PageHero
+        title={<>Commercial cleaning<br /><span>mastery program.</span></>}
+        intro="A training track for crew members who want more than an hourly rate — and for clients who want to know the person cleaning their building was taught, not just hired."
+        actions={
+          <>
             <RouteButton to="/careers" variant="accent" size="lg">
               Join the crew, then the program
               <ArrowRight className="size-5" aria-hidden="true" />
@@ -63,9 +58,9 @@ export function TrainingPage() {
             >
               Ask about the next cohort
             </LinkButton>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       <section className="mx-auto max-w-5xl px-[clamp(1rem,0.5rem+2vw,2rem)] py-16">
         <Callout tone="warn">
@@ -92,7 +87,7 @@ export function TrainingPage() {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {MODULES.map((module, index) => (
               <article key={module.title} className="reveal card-surface p-5">
-                <span className="font-[family-name:var(--font-display)] text-2xl font-bold text-brand-500 dark:text-brand-400">
+                <span className="font-[family-name:var(--font-art)] text-3xl font-bold uppercase text-am4-blue dark:text-am4-soft">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <h3 className="mt-1 text-base font-bold">{module.title}</h3>
@@ -127,6 +122,6 @@ export function TrainingPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

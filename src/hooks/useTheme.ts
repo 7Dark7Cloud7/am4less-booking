@@ -9,7 +9,7 @@ function systemMode(): Mode {
 
 function apply(mode: Mode): void {
   document.documentElement.dataset.theme = mode
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'dark' ? '#050b2e' : '#0000f0')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'dark' ? '#0a0f24' : '#2433f5')
 }
 
 export function useTheme() {

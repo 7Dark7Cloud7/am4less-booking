@@ -52,23 +52,25 @@ export function BookPage() {
 
   if (success) {
     return (
-      <div className="mx-auto max-w-3xl px-[clamp(1rem,0.5rem+2vw,2rem)] py-10">
-        <SuccessPanel
-          booking={success}
-          onReset={() => {
-            controller.reset()
-            setSuccess(null)
-          }}
-        />
-        {controller.draft.contact.phone && (
-          <p className="mt-6 text-center text-sm text-ink-faint">
-            Want to talk it through?{' '}
-            <a href={whatsappHref(leadMessage(success))} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
-              Message the crew lead
-            </a>
-            .
-          </p>
-        )}
+      <div className="am4-route-utility">
+        <div className="mx-auto max-w-3xl px-[clamp(1rem,0.5rem+2vw,2rem)] py-10">
+          <SuccessPanel
+            booking={success}
+            onReset={() => {
+              controller.reset()
+              setSuccess(null)
+            }}
+          />
+          {controller.draft.contact.phone && (
+            <p className="mt-6 text-center text-sm text-ink-faint">
+              Want to talk it through?{' '}
+              <a href={whatsappHref(leadMessage(success))} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                Message the crew lead
+              </a>
+              .
+            </p>
+          )}
+        </div>
       </div>
     )
   }
@@ -76,64 +78,66 @@ export function BookPage() {
   const { step, next, back, goTo, estimate, plan, draft } = controller
 
   return (
-    <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] py-8">
-      <div className="mb-6 flex items-center gap-3">
-        <span className="grid size-11 place-items-center rounded-xl bg-brand-600 text-white dark:bg-brand-400 dark:text-brand-950">
-          <CalendarCheck2 className="size-6" aria-hidden="true" />
-        </span>
-        <div>
-          <h1 className="text-2xl font-bold sm:text-3xl">Book a cleaning</h1>
-          <p className="text-sm text-ink-soft">Step {step + 1} of {STEPS.length} · {STEPS[step]}</p>
-        </div>
-      </div>
-
-      <Stepper step={step} onJump={goTo} />
-
-      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        <section aria-live="polite">
-          <h2 className="text-xl font-bold">{STEP_PROMPTS[step].title}</h2>
-          <p className="mt-1 mb-6 text-sm text-ink-soft">{STEP_PROMPTS[step].sub}</p>
-
-          {step === 0 && (
-            <div className="space-y-10">
-              <PropertyStep controller={controller} />
-              <ServicesStep controller={controller} />
-            </div>
-          )}
-          {step === 1 && <ScheduleStep controller={controller} />}
-          {step === 2 && (
-            <div className="space-y-10">
-              <DetailsStep controller={controller} />
-              <ReviewStep controller={controller} onSubmit={(b) => void handleSubmit(b)} />
-            </div>
-          )}
-
-          <div className="mt-8 hidden items-center gap-3 border-t border-line pt-6 lg:flex">
-            {step > 0 && (
-              <Button variant="outline" onClick={back} iconLeft={<ArrowLeft className="size-4" aria-hidden="true" />}>
-                Back
-              </Button>
-            )}
-            {step < STEPS.length - 1 && (
-              <Button onClick={next} iconRight={<ArrowRight className="size-4" aria-hidden="true" />}>
-                Continue
-              </Button>
-            )}
-            <p className="ms-auto text-xs text-ink-faint">Autosaved on this device</p>
+    <div className="am4-route-utility">
+      <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] pt-8 pb-48 lg:pb-8">
+        <div className="am4-book-header">
+          <span className="grid size-11 place-items-center rounded-xl">
+            <CalendarCheck2 className="size-6" aria-hidden="true" />
+          </span>
+          <div>
+            <h1>Book a cleaning</h1>
+            <p className="text-sm">Step {step + 1} of {STEPS.length} · {STEPS[step]}</p>
           </div>
+        </div>
 
-          <PlanBar
-            plan={plan}
-            estimate={estimate}
-            serviceCount={draft.serviceIds.length}
-            step={step}
-            lastStep={STEPS.length - 1}
-            onBack={back}
-            onNext={() => void next()}
-          />
-        </section>
+        <Stepper step={step} onJump={goTo} />
 
-        <EstimatePanel plan={plan} estimate={estimate} frequency={draft.frequency} serviceCount={draft.serviceIds.length} />
+        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+          <section aria-live="polite">
+            <h2 className="text-xl font-bold">{STEP_PROMPTS[step].title}</h2>
+            <p className="mt-1 mb-6 text-sm text-ink-soft">{STEP_PROMPTS[step].sub}</p>
+
+            {step === 0 && (
+              <div className="space-y-10">
+                <PropertyStep controller={controller} />
+                <ServicesStep controller={controller} />
+              </div>
+            )}
+            {step === 1 && <ScheduleStep controller={controller} />}
+            {step === 2 && (
+              <div className="space-y-10">
+                <DetailsStep controller={controller} />
+                <ReviewStep controller={controller} onSubmit={(b) => void handleSubmit(b)} />
+              </div>
+            )}
+
+            <div className="mt-8 hidden items-center gap-3 border-t border-line pt-6 lg:flex">
+              {step > 0 && (
+                <Button variant="outline" onClick={back} iconLeft={<ArrowLeft className="size-4" aria-hidden="true" />}>
+                  Back
+                </Button>
+              )}
+              {step < STEPS.length - 1 && (
+                <Button onClick={next} iconRight={<ArrowRight className="size-4" aria-hidden="true" />}>
+                  Continue
+                </Button>
+              )}
+              <p className="ms-auto text-xs text-ink-faint">Autosaved on this device</p>
+            </div>
+
+            <PlanBar
+              plan={plan}
+              estimate={estimate}
+              serviceCount={draft.serviceIds.length}
+              step={step}
+              lastStep={STEPS.length - 1}
+              onBack={back}
+              onNext={() => void next()}
+            />
+          </section>
+
+          <EstimatePanel plan={plan} estimate={estimate} frequency={draft.frequency} serviceCount={draft.serviceIds.length} />
+        </div>
       </div>
     </div>
   )

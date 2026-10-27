@@ -12,16 +12,8 @@ export const FAQS = [
     a: 'One-time work such as move-out cleans and pressure washing is often scheduled inside the same week. Overnight and after-hours crews are available where the building requires it.'
   },
   {
-    q: 'What is included in post-construction cleanup?',
-    a: 'Debris and fine dust extraction, paint and silicone splatter removal, sticker and grout-haze resolution, and floor detailing ready for the walkthrough. High-level fixture and ductwork work, plus furniture unboxing, assembly and layout to your floor plan, are on our rollout list — book the dust stage now and add those lines when they open.'
-  },
-  {
     q: 'Can you handle the whole event, not just the cleaning?',
     a: 'Today we book the part that decides whether you get the venue back on time: rapid post-event cleanup, waste sorting, bottle clearing, floor scrub and restoration against an overnight deadline. Table, chair, staging and tent set-up and temporary LED or ambient lighting are the next services we open — ask us and we will tell you honestly whether we can cover them for your date.'
-  },
-  {
-    q: 'Do you haul off old furniture and equipment?',
-    a: 'Bulk hauling and equipment transport are not live yet, so we will not take that part of your job and leave you waiting. Move-out cleans are bookable now, and we help you plan around the haul.'
   },
   {
     q: 'Are you insured for occupied and sensitive buildings?',

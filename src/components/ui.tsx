@@ -26,7 +26,7 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <Tag className="text-3xl sm:text-4xl font-bold text-ink">{title}</Tag>
+      <Tag className="font-[family-name:var(--font-art)] text-3xl font-bold uppercase leading-[0.98] tracking-[-0.02em] text-ink sm:text-4xl">{title}</Tag>
       {intro && <p className="mt-3 text-lg text-ink-soft">{intro}</p>}
     </div>
   )
@@ -42,7 +42,7 @@ export function Pill({
   const tones = {
     neutral: 'bg-surface-muted text-ink-soft border-line',
     accent: 'bg-accent-500/15 text-accent-700 border-accent-500/40 dark:text-accent-300',
-    brand: 'bg-brand-600 text-white border-brand-600',
+    brand: 'bg-am4-blue text-am4-soft border-am4-blue',
     onDark: 'bg-white/12 text-white border-white/30'
   }
   return (

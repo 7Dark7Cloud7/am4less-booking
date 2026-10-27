@@ -89,8 +89,8 @@ export function PropertyStep({ controller }: { controller: BookingController }) 
 
       <p className="flex items-center gap-2 rounded-[var(--radius-field)] bg-surface-muted p-4 text-sm text-ink-soft">
         <ChevronRight className="size-4 shrink-0 text-brand-600 dark:text-brand-300" aria-hidden="true" />
-        The space decides the crew. Medical, school and construction work takes longer per square foot because of
-        dwell times and dust, so the crew size and hours in your job plan rise with it.
+        The space decides the crew. Medical and school work takes longer per square foot because of
+        dwell times, so the crew size and hours in your job plan rise with it.
       </p>
     </div>
   )

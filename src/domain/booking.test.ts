@@ -7,7 +7,7 @@ const DRAFT: BookingDraft = {
   ...EMPTY_DRAFT,
   propertyType: 'office',
   squareFeet: 10000,
-  serviceIds: ['rec-office', 'rec-residential'],
+  serviceIds: ['rec-office', 'rec-floor'],
   addons: ['supervise'],
   frequency: 'weekly',
   preferredDate: '2026-11-05',
@@ -64,8 +64,8 @@ describe('booking helpers', () => {
   })
 
   it('adds durations, treating unknown ids as zero', () => {
-    const booking = { ...buildBooking(DRAFT), serviceIds: ['rec-office', 'rec-residential', 'ghost'] }
-    expect(totalHours(booking)).toBe(7)
+    const booking = { ...buildBooking(DRAFT), serviceIds: ['rec-office', 'rec-floor', 'ghost'] }
+    expect(totalHours(booking)).toBe(8)
     expect(totalHours({ ...booking, serviceIds: [] })).toBe(0)
   })
 

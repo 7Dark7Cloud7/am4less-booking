@@ -158,19 +158,19 @@ export function ChoiceCard({
     <label
       className={`flex min-h-[3.25rem] cursor-pointer items-center gap-3 rounded-[var(--radius-field)] border p-3.5 transition-colors ${
         checked
-          ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/40 dark:border-brand-400'
+          ? 'border-am4-blue bg-am4-red/10 dark:bg-am4-red/25 ring-1 ring-am4-blue/30'
           : 'border-line-strong bg-surface hover:border-brand-300 hover:bg-surface-muted'
       } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       <input
         type="checkbox"
-        className="size-5 shrink-0 accent-brand-600"
+        className="size-5 shrink-0 accent-am4-blue"
         checked={checked}
         disabled={disabled}
         onChange={onChange}
       />
       {icon && <span className="text-brand-600 dark:text-brand-300">{icon}</span>}
-      <span className="min-w-0">
+      <span className="min-w-0 wrap-anywhere">
         <span className="block text-sm font-semibold leading-snug">{title}</span>
         {subtitle && <span className="block text-xs leading-snug text-ink-soft">{subtitle}</span>}
       </span>

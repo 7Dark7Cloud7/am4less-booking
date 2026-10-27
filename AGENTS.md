@@ -31,11 +31,14 @@ component or E2E runner, so browser QA is still required (checklist in `HANDOFF.
    owner's webhook payload, never to the screen. Customer-facing surfaces show `jobPlanFor()` instead —
    crew size, hours on site, visits per month. No `$` may appear in rendered UI while the flag is false —
    `src/domain/pricing-rules.test.ts` walks every bookable line × property type × frequency to prove it.
-2. **Only the cleaning lines are bookable.** 9 of the 18 catalogue lines carry `comingSoon: true` in
+2. **Only the cleaning lines are bookable.** 4 of the 11 catalogue lines carry `comingSoon: true` in
    `src/domain/services.ts`. They render as greyed "coming soon" cards on `/services` and must stay
    unselectable in the booking wizard. Never add a coming-soon line to a filter, count, CTA or shortcut.
    To launch a line: delete its `comingSoon: true` and let `BOOKABLE` re-derive everything — but ask the owner
-   first; `src/domain/services.test.ts` lists the nine bookable ids by name on purpose.
+   first; `src/domain/services.test.ts` lists the seven bookable ids by name on purpose. Post-construction,
+   specialized transport and all residential/apartment work were retired on 2026-10-27: do not bring back a
+   `con-`/`log-`/`rec-residential`/`rec-apartment` id, those categories, or a `residence` property type.
+   The company is **commercial only**.
 3. **Don't invent business facts.** Phone, WhatsApp, email, hours and coverage all come from
    `src/domain/business.ts` — the only unconfirmed value there is `email`. No fake testimonials, no
    certifications, no guarantees the owner hasn't made.

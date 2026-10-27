@@ -9,7 +9,13 @@ export default defineConfig(({ mode }) => ({
   // Capacitor WebView's local scheme when the app ships as an Android/iOS shell.
   base: './',
   resolve: {
-    alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) }
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // no PWA plugin in native mode, so the service-worker entry point needs a no-op stand-in
+      ...(mode === 'native'
+        ? { 'virtual:pwa-register': fileURLToPath(new URL('./src/pwa-register.native.ts', import.meta.url)) }
+        : {})
+    }
   },
   plugins: [
     react(),
@@ -37,14 +43,14 @@ export default defineConfig(({ mode }) => ({
           name: 'AM4LESS Cleaning — Book & Get Quotes',
           short_name: 'AM4LESS',
           description:
-            'Book commercial and residential cleaning, get instant estimates, and manage recurring service. Serving Quakertown, PA and all of Pennsylvania.',
+            'Book commercial cleaning, get instant estimates, and manage recurring service. Serving Quakertown, PA and all of Pennsylvania.',
           start_url: '/',
           scope: '/',
           display: 'standalone',
           display_override: ['window-title-controls', 'standalone'],
           orientation: 'portrait-primary',
-          background_color: '#050b2e',
-          theme_color: '#0000f0',
+          background_color: '#0a0f24',
+          theme_color: '#2433f5',
           lang: 'en-US',
           categories: ['business', 'productivity', 'lifestyle'],
           icons: [

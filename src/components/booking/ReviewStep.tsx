@@ -55,7 +55,7 @@ export function ReviewStep({
         type="button"
         disabled={Object.keys(blocking).length > 0 || submitting}
         onClick={() => onSubmit(booking)}
-        className="inline-flex min-h-[3.5rem] w-full items-center justify-center gap-2 rounded-full bg-brand-600 px-6 text-base font-bold text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-45 dark:bg-brand-400 dark:text-brand-950"
+        className="inline-flex min-h-[3.5rem] w-full items-center justify-center gap-2 rounded-full bg-am4-blue px-6 text-base font-bold text-am4-soft transition-colors hover:bg-am4-night-blue disabled:cursor-not-allowed disabled:opacity-45"
       >
         <Send className="size-5" aria-hidden="true" />
         {submitting ? 'Sending…' : 'Send my booking request'}

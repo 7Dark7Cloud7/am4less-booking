@@ -18,7 +18,8 @@ describe('jobPlanFor — crew sizing', () => {
 
   it('rounds labour-hours to the nearest half hour', () => {
     expect(plan(['rec-office']).crewHours).toBe(10) // 3 hr + 10,000/1,400
-    expect(plan(['rec-residential'], ['windows']).crewHours).toBe(5.5) // 4 hr + 1.5 hr add-on
+    expect(plan(['rec-floor'], [], 3333).crewHours).toBe(7.5) // 5 hr + 3,333/1,400
+    expect(plan(['deep-upholstery'], ['windows']).crewHours).toBe(4.5) // 3 hr + 1.5 hr add-on
   })
 
   it('sizes the crew around a five-hour shift', () => {
@@ -45,14 +46,14 @@ describe('jobPlanFor — crew sizing', () => {
 
 describe('jobPlanFor — the coming-soon gate', () => {
   it('gives a gated line no crew, no hours and no survey flag', () => {
-    const p = plan(['con-furniture'])
+    const p = plan(['evt-setup'])
     expect(p.crewHours).toBe(0)
     expect(p.crewSize).toBe(0)
     expect(p.needsSurvey).toBe(false)
   })
 
   it('ignores gated lines but keeps the bookable ones', () => {
-    expect(plan(['rec-office', 'log-haul']).crewHours).toBe(10)
+    expect(plan(['rec-office', 'evt-led']).crewHours).toBe(10)
   })
 
   it('flags a bookable line that needs a walk-through', () => {

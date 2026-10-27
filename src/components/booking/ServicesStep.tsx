@@ -65,7 +65,7 @@ export function ServicesStep({ controller }: { controller: BookingController }) 
           return (
             <div
               key={service.id}
-              className={`card-surface p-0 transition-colors ${checked ? 'border-brand-500 ring-1 ring-brand-500/30' : ''}`}
+              className={`card-surface p-0 transition-colors ${checked ? 'border-am4-blue ring-1 ring-am4-blue/30' : ''}`}
             >
               <div className="flex items-start gap-3 p-4">
                 <div className="min-w-0 flex-1">
@@ -158,7 +158,7 @@ function FilterChip({
       onClick={onClick}
       className={`flex min-h-[2.875rem] shrink-0 snap-start items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors ${
         active
-          ? 'border-brand-600 bg-brand-600 text-white dark:border-brand-400 dark:bg-brand-400 dark:text-brand-950'
+          ? 'border-am4-blue bg-am4-blue text-am4-soft'
           : 'border-line-strong bg-surface text-ink-soft hover:border-brand-300 hover:text-ink'
       }`}
     >

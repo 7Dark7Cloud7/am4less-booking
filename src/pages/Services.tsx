@@ -7,6 +7,7 @@ import { PUBLIC_PRICING } from '../domain/config'
 import { RouteButton } from '../components/Button'
 import { CategoryIcon, IconTile, IntensityDots, Pill, SectionHeading } from '../components/ui'
 import { Photo } from '../components/Photo'
+import { PageHero } from '../components/PageHero'
 import { CATEGORY_PHOTO } from '../domain/media'
 import type { ServiceItem } from '../domain/types'
 
@@ -91,36 +92,28 @@ export function ServicesPage() {
     service.details.some((detail) => detail.toLowerCase().includes(needle))
 
   return (
-    <>
-      <section className="bg-inverse py-14 text-inverse-ink">
-        <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)]">
-          <p className="mb-3 text-xs font-bold tracking-[0.14em] text-brand-200 uppercase">
-            Full catalogue · {BOOKABLE.length} lines bookable today
-          </p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold sm:text-5xl">
-            What we cover, and what you can book now
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-brand-100">
-            Past basic surface cleaning and floor care: specialised facilities management, move-in and move-out prep,
-            post-construction handover, event turnarounds, heavy logistics and specialty restoration. The cleaning
-            lines are live — the rest are shown dimmed until each crew is certified.
-          </p>
-          <div className="relative mt-7 max-w-md">
-            <Search className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-brand-300" aria-hidden="true" />
-            <input
-              type="search"
-              id="service-search"
-              name="q"
-              autoComplete="off"
-              className="field-control ps-12 dark:bg-white/10 dark:text-white dark:border-white/25"
-              placeholder="Search services, e.g. grout, hood, mattress"
-              aria-label="Search services"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </div>
+    <div className="am4-route">
+      <PageHero
+        title={<>Cleaning services.<br /><span>Ready when you are.</span></>}
+        intro={`Explore ${BOOKABLE.length} cleaning lines available now. Specialty services remain visible but unselectable until each crew is ready.`}
+      >
+        <label htmlFor="service-search" className="mb-2 block text-sm font-bold text-white">
+          Find the right service
+        </label>
+        <div className="relative">
+          <Search className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-brand-600" aria-hidden="true" />
+          <input
+            type="search"
+            id="service-search"
+            name="q"
+            autoComplete="off"
+            className="field-control ps-12"
+            placeholder="Search grout, floors, offices…"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
         </div>
-      </section>
+      </PageHero>
 
       <nav aria-label="Jump to category" className="sticky top-[4.25rem] z-30 border-b border-line bg-surface/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl gap-1.5 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] py-3">
@@ -193,6 +186,6 @@ export function ServicesPage() {
           </RouteButton>
         </div>
       </div>
-    </>
+    </div>
   )
 }

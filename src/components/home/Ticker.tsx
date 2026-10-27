@@ -1,6 +1,5 @@
 const ITEMS = [
   'Recurring janitorial',
-  'Post-construction',
   'Event turnovers',
   'Pressure washing',
   'Medical & school disinfection',

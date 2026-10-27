@@ -21,8 +21,8 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
 
   return (
     <header
-      className={`safe-area-top sticky top-0 z-50 border-b backdrop-blur-lg ${
-        overlay ? 'border-white/10 bg-lux-base/90' : 'border-line bg-surface/85'
+      className={`am4-site-header safe-area-top sticky top-0 z-50 border-b backdrop-blur-lg ${
+        overlay ? 'border-white/10 bg-lux-base/90' : 'border-line bg-surface/90'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-[clamp(1rem,0.5rem+2vw,2rem)]">

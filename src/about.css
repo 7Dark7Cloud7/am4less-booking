@@ -1,0 +1,70 @@
+@layer components {
+  .am4-about { width: min(100%, 90rem); margin-inline: auto; padding: 1.25rem; }
+  .am4-about :is(h1, h2) { font-family: var(--font-art); font-weight: 700; letter-spacing: -0.025em; line-height: 0.95; text-transform: uppercase; text-wrap: balance; }
+  .am4-about h2 { font-size: clamp(2.75rem, 5vw, 4.5rem); }
+  .am4-about :is(p, dd) { text-wrap: pretty; }
+  .am4-about ::selection { background: var(--color-am4-soft); color: var(--color-am4-navy); }
+  .am4-about-hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; overflow: hidden; border-radius: var(--radius-am4-panel); padding: 3.5rem; background: var(--color-am4-blue); color: var(--color-am4-white); }
+  .am4-about-hero h1 { max-width: 15ch; font-size: clamp(3.5rem, 6.5vw, 6rem); }
+  .am4-about-hero-copy > p { max-width: 48ch; margin-top: 1.5rem; color: var(--color-am4-soft); font-size: 0.95rem; }
+  .am4-about-hero-copy .am4-about-belief { color: var(--color-am4-white); font-size: 1.25rem; font-weight: 700; }
+  .am4-about-hero-photo { display: flex; min-width: 0; flex-direction: column; align-self: stretch; overflow: hidden; border-radius: var(--radius-field); background: var(--color-am4-white); color: var(--color-am4-navy); }
+  .am4-about-hero-photo img { width: 100%; min-height: 0; flex: 1; aspect-ratio: 4 / 3; object-fit: cover; }
+  .am4-about-hero-photo figcaption { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; font-weight: 700; }
+  .am4-about-hero-photo svg { flex-shrink: 0; color: var(--color-am4-red); }
+  .am4-about-mission { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 0 3rem 4rem; }
+  .am4-about-mission h2 span, .am4-about-training h2 span { color: var(--color-brand-600); }
+  .am4-about-mission > p { max-width: 65ch; align-self: center; color: var(--color-ink-soft); }
+  .am4-about-values { border-radius: var(--radius-am4-panel); padding: 3.5rem; background: var(--color-am4-blue); color: var(--color-am4-white); }
+  .am4-about-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 3rem; margin-bottom: 2.5rem; }
+  .am4-about-section-heading > p { max-width: 34ch; color: var(--color-am4-soft); font-size: 0.9rem; }
+  .am4-value-list { border-top: 1px solid color-mix(in srgb, var(--color-am4-white) 35%, transparent); }
+  .am4-value-list li { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; border-bottom: 1px solid color-mix(in srgb, var(--color-am4-white) 35%, transparent); padding-block: 1.5rem; }
+  .am4-value-list h3 { font-family: var(--font-art); font-size: clamp(2rem, 3vw, 2.75rem); font-weight: 700; line-height: 1; text-transform: uppercase; }
+  .am4-value-list p { max-width: 52ch; color: var(--color-am4-soft); font-size: 0.9rem; }
+  .am4-about-training { padding: 4rem 3rem; }
+  .am4-about-training-body { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; margin-top: 2.5rem; }
+  .am4-about-training-body h3 { max-width: 35ch; font-size: 1.25rem; font-weight: 700; line-height: 1.4; }
+  .am4-about-training-body p { max-width: 65ch; margin-top: 1rem; color: var(--color-ink-soft); font-size: 0.95rem; }
+  .am4-about-training-purpose { border-block: 1px solid var(--color-line-strong); padding: 1.5rem 0; }
+  .am4-about-training-purpose svg { color: var(--color-accent-600); }
+  .am4-about-training-purpose p { color: var(--color-ink); font-family: var(--font-art); font-size: 2.5rem; font-weight: 700; line-height: 1.15; text-transform: uppercase; }
+  .am4-about-training-purpose span { display: block; margin-top: 1rem; color: var(--color-ink-soft); font-size: 0.875rem; }
+  .am4-about-vision { padding: 3rem; background: var(--color-surface-muted); border-radius: var(--radius-am4-panel); }
+  .am4-about-vision h2 { font-size: 2.75rem; }
+  .am4-about-vision p { max-width: 60ch; margin-top: 1.5rem; color: var(--color-ink); font-size: clamp(1.25rem, 2.5vw, 2rem); font-weight: 600; line-height: 1.5; }
+  .am4-about-scope { padding: 4rem 3rem; }
+  .am4-about-scope-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .am4-about-scope-links a { display: inline-flex; min-height: 3rem; align-items: center; gap: 1rem; border: 1px solid var(--color-line-strong); border-radius: var(--radius-field); padding: 0.75rem 1rem; color: var(--color-ink); font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+  .am4-about-scope-links a:hover { background: var(--color-surface-muted); border-color: var(--color-brand-500); }
+  .am4-about-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; border-radius: var(--radius-am4-panel); padding: 3.5rem; background: var(--color-am4-navy); color: var(--color-am4-white); }
+  .am4-about-contact h2 span { color: var(--color-am4-peri); }
+  .am4-about-facts { display: grid; gap: 1rem; align-content: center; }
+  .am4-about-facts > div { border-bottom: 1px solid color-mix(in srgb, var(--color-am4-white) 25%, transparent); padding-bottom: 1rem; }
+  .am4-about-facts dt { color: var(--color-am4-soft); font-size: 0.75rem; }
+  .am4-about-facts dd { margin-top: 0.25rem; font-size: 0.9rem; }
+  .am4-about-hero :focus-visible, .am4-about-contact :focus-visible { outline-color: var(--color-am4-white); }
+  [data-theme='dark'] .am4-about-mission h2 span, [data-theme='dark'] .am4-about-training h2 span { color: var(--color-brand-200); }
+  @media (max-width: 63.99rem) {
+    .am4-about-hero { padding: 2rem; grid-template-columns: 1fr 0.8fr; }
+    .am4-about-mission, .am4-about-training-body, .am4-about-contact { gap: 2rem; }
+    .am4-about-values, .am4-about-contact { padding: 2.5rem; }
+  }
+  @media (max-width: 47.99rem) {
+    .am4-about { padding: 0.75rem; }
+    .am4-about-hero, .am4-about-mission, .am4-value-list li, .am4-about-training-body, .am4-about-contact { grid-template-columns: minmax(0, 1fr); }
+    .am4-about-hero { padding: 2rem 1.5rem; gap: 2rem; }
+    .am4-about-hero h1 { font-size: clamp(3rem, 12vw, 4.5rem); }
+    .am4-about-hero-photo img { aspect-ratio: 3 / 2; }
+    .am4-about-mission { padding: 0 1rem 3rem; gap: 1.5rem; }
+    .am4-about-values, .am4-about-contact { padding: 2.5rem 1.5rem; }
+    .am4-about-section-heading { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
+    .am4-value-list li { gap: 0.75rem; }
+    .am4-about-training, .am4-about-scope { padding: 3rem 1rem; }
+    .am4-about-training-body { gap: 2rem; margin-top: 2rem; }
+    .am4-about-vision { padding: 2rem 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .am4-about *, .am4-about *::before, .am4-about *::after { animation: none; transition: none; scroll-behavior: auto; }
+  }
+}

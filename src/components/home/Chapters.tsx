@@ -2,23 +2,6 @@ import { Chapter, type ChapterData } from './Chapter'
 
 const CHAPTERS: ChapterData[] = [
   {
-    eyebrow: 'Post-construction',
-    title: 'The last crew before the walkthrough.',
-    body: 'Builders and general contractors need a site inspection-ready. We pull the dust nobody else reaches, then detail the glass, frames and floors before the owner arrives.',
-    bullets: [
-      'Drywall and sanding dust extracted from cavities and ledges',
-      'Paint, silicone and grout haze removed from frames and glass',
-      'Sticker and label residue dissolved without surface damage',
-      'HEPA vacuum and damp-wipe two-pass finish'
-    ],
-    meta: [
-      { label: 'Crew', value: '2–6 technicians' },
-      { label: 'Handover', value: 'Photo sign-off, room by room' }
-    ],
-    photo: 'postConstruction',
-    inset: 'floorCare'
-  },
-  {
     eyebrow: 'Recurring programs',
     title: 'The same standard, every visit.',
     body: 'Daily or scheduled cleaning of offices, common areas and restrooms — weekly through quarterly. The scope is written before the first visit, then held on every visit after it.',
@@ -92,22 +75,13 @@ const CHAPTERS: ChapterData[] = [
 
 export function Chapters() {
   return (
-    <section className="mx-auto max-w-[84rem] px-5 py-8 sm:px-8 lg:px-12">
-      <div className="max-w-2xl">
-        <p className="lux-eyebrow">Service disciplines</p>
-        <h2 className="mt-5 text-[clamp(2rem,4vw,3.4rem)] font-light text-lux-fg">Tailored to the work.</h2>
-        <p className="mt-5 leading-relaxed text-lux-fg-soft">
-          Every line below is quoted after a walkthrough, never over the phone — because the building decides the crew,
-          the hours and the detail, not a rate sheet.
-        </p>
-      </div>
-
-      <div className="mt-16 space-y-24 sm:mt-20 sm:space-y-32">
-        {CHAPTERS.map((chapter) => (
-          <div key={chapter.title} className="reveal">
-            <Chapter data={chapter} />
-          </div>
-        ))}
+    <section className="mx-auto max-w-7xl px-5 pb-14 sm:px-8 sm:pb-20">
+      <h2 className="text-3xl font-extrabold sm:text-4xl">Find your kind of clean.</h2>
+      <p className="mt-2 max-w-2xl text-ink-soft">
+        Recurring care or a one-time reset. Explore the details, then build a plan for your space.
+      </p>
+      <div className="mt-7 grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {CHAPTERS.map((chapter) => <Chapter key={chapter.title} data={chapter} />)}
       </div>
     </section>
   )

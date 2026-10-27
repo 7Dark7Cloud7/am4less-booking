@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { buildBooking } from '../domain/booking'
-import { estimateFor, jobPlanFor } from '../domain/estimate'
+import { estimateFor, isPropertyType, jobPlanFor } from '../domain/estimate'
 import { isBookable } from '../domain/services'
 import { validateDraftForSubmit } from '../domain/validation'
 import { draftStore } from '../infrastructure/stores'
@@ -13,7 +13,8 @@ export type StepIndex = 0 | 1 | 2
 function loadDraft(): BookingDraft {
   const stored = draftStore.load()
   const live = stored.serviceIds.filter(isBookable)
-  return live.length === stored.serviceIds.length ? stored : { ...stored, serviceIds: live }
+  const propertyType = isPropertyType(stored.propertyType) ? stored.propertyType : null
+  return { ...stored, serviceIds: live, propertyType }
 }
 
 export function useBooking() {

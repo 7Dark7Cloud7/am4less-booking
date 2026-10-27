@@ -1,53 +1,12 @@
-import { ArrowRight, Phone } from 'lucide-react'
+import { ArrowUpRight, Phone } from 'lucide-react'
 import { BUSINESS } from '../../domain/business'
-import { LinkButton, RouteButton } from '../Button'
-
-const FACTS = [
-  { label: 'Hours', value: BUSINESS.hoursSummary },
-  { label: 'Base', value: `${BUSINESS.city}, ${BUSINESS.region} ${BUSINESS.postalCode}` },
-  { label: 'Typical reply', value: 'Within one hour on new requests' },
-  { label: 'Walkthrough', value: 'Free, on site, before any price' }
-]
+import { PHOTOS } from '../../domain/media'
 
 export function Closing() {
   return (
-    <section className="relative isolate overflow-hidden border-t border-white/10">
-      <div aria-hidden="true" className="absolute inset-0 lux-glow-red" />
-      <div className="relative mx-auto max-w-[84rem] px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
-        <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-24">
-          <div>
-            <p className="lux-eyebrow">Booking</p>
-            <h2 className="mt-5 max-w-[16ch] text-[clamp(2.2rem,5vw,4.2rem)] font-light text-lux-fg">
-              Ready when the building is.
-            </h2>
-            <p className="mt-6 max-w-lg leading-relaxed text-lux-fg-soft">
-              Build the scope online in about two minutes — the space, the services, the access and how often. A crew
-              lead confirms it on a free walkthrough and writes the price before anyone touches a mop.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <RouteButton to="/book" variant="accent" size="lg">
-                Start my booking
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </RouteButton>
-              <LinkButton href={BUSINESS.phoneHref} variant="outlineOnDark" size="lg">
-                <Phone className="size-4" aria-hidden="true" />
-                {BUSINESS.phoneDisplay}
-              </LinkButton>
-            </div>
-          </div>
-
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-7 border-t border-white/15 pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12">
-            {FACTS.map((fact) => (
-              <div key={fact.label}>
-                <dt className="text-[0.6rem] font-semibold tracking-[0.24em] text-lux-fg-faint uppercase">
-                  {fact.label}
-                </dt>
-                <dd className="mt-2 text-sm leading-relaxed font-medium text-lux-fg">{fact.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
+    <section className="am4-closing" aria-labelledby="closing-heading">
+      <img src={PHOTOS.heroCrew} alt="A polished industrial floor from an AM4LESS cleaning project" loading="lazy" decoding="async" />
+      <div className="am4-closing-copy"><h2 id="closing-heading">Your next<br /><span>fresh start.</span></h2><p>Commercial cleaning in {BUSINESS.city}, {BUSINESS.region} and all of Pennsylvania.</p><div className="am4-hero-actions"><a href="#quick-booking" className="am4-button am4-button-red">Plan a cleaning <ArrowUpRight className="size-5" aria-hidden="true" /></a><a href={BUSINESS.phoneHref} className="am4-text-link"><Phone className="size-4" aria-hidden="true" />{BUSINESS.phoneDisplay}</a></div><p className="am4-hours">{BUSINESS.hoursSummary}</p></div>
     </section>
   )
 }

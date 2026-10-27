@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/7Dark7Cloud7/am4less-booking/actions/workflows/ci.yml/badge.svg)
 
-Marketing site + online booking app for **AM4LESS**, a commercial & residential cleaning company in Quakertown, PA.
+Marketing site + online booking app for **AM4LESS**, a commercial cleaning company in Quakertown, PA.
 
 Live production: **https://am4less-booking.vercel.app**
 Source: **https://github.com/7Dark7Cloud7/am4less-booking** (public)
@@ -33,7 +33,7 @@ Node 20.19+ or 22.12+ required (Vite 7).
 
 ## Two rules before you change anything
 
-1. **Only the 9 cleaning lines are bookable.** The other 9 catalogue lines carry `comingSoon: true` in `src/domain/services.ts` and render as shadow "coming soon" cards. Remove the flag to launch one.
+1. **Only the 7 cleaning lines are bookable.** The other 4 catalogue lines carry `comingSoon: true` in `src/domain/services.ts` and render as shadow "coming soon" cards. Remove the flag to launch one. Post-construction, specialized transport and residential/apartment work were retired on 2026-10-27 and are not in the catalogue at all — the company is commercial only.
 2. **No published prices.** `PUBLIC_PRICING` in `src/domain/config.ts` is `false` until the owner agrees a rate card. The estimator exists and runs, but its dollar output must never be rendered in the UI while the flag is off.
 
 Full details, architecture map and deploy runbook: **[HANDOFF.md](./HANDOFF.md)**.

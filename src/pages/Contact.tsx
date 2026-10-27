@@ -5,18 +5,18 @@ import { BUSINESS } from '../domain/business'
 import { formatPhone, digits } from '../domain/validation'
 import { LinkButton, RouteButton } from '../components/Button'
 import { Callout, SectionHeading } from '../components/ui'
+import { PageHero } from '../components/PageHero'
 import { TextArea, TextField } from '../components/Field'
 
 const SUBJECTS = [
   'Request a quote',
-  'Post-construction / renovation cleanup',
   'Pressure washing or exterior',
   'Upholstery, carpet or leather',
   'Move-in / move-out deep clean',
   'Recurring contract question',
   'Billing or invoice',
   'Event turnaround (bookable now)',
-  'Event set-up, LED, HVAC or hauling (opening soon)',
+  'Event set-up, LED or HVAC (opening soon)',
   'Something else'
 ] as const
 
@@ -61,28 +61,17 @@ export function ContactPage() {
   }
 
   return (
-    <>
-      <section className="bg-inverse py-14 text-inverse-ink">
-        <div className="mx-auto max-w-5xl px-[clamp(1rem,0.5rem+2vw,2rem)]">
-          <p className="mb-3 text-xs font-bold tracking-[0.14em] text-brand-200 uppercase">Contact</p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold sm:text-5xl">
-            Talk to a person, not a form farm
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-brand-100">
-            Fastest routes are a call or a WhatsApp message. Use the form when you want it in writing.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+    <div className="am4-route">
+      <PageHero
+        title={<>Reach out.<br /><span>A person answers.</span></>}
+        intro="Fastest routes are a call or a WhatsApp message. Use the form when you want the scope in writing."
+        actions={
+          <>
             <LinkButton href={BUSINESS.phoneHref} variant="accent" size="lg">
               <Phone className="size-5" aria-hidden="true" />
               {BUSINESS.phoneDisplay}
             </LinkButton>
-            <LinkButton
-              href={BUSINESS.whatsappHref}
-              variant="outline"
-              size="lg"
-              external
-              className="border-white/35 text-white"
-            >
+            <LinkButton href={BUSINESS.whatsappHref} variant="outlineOnDark" size="lg" external>
               <MessageCircle className="size-5" aria-hidden="true" />
               WhatsApp us
             </LinkButton>
@@ -90,9 +79,9 @@ export function ContactPage() {
               <Mail className="size-5" aria-hidden="true" />
               Email
             </LinkButton>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       <section className="mx-auto grid max-w-5xl gap-10 px-[clamp(1rem,0.5rem+2vw,2rem)] py-14 lg:grid-cols-[1.3fr_1fr]">
         <div className="card-surface p-6">
@@ -186,7 +175,7 @@ export function ContactPage() {
                 />
                 <button
                   type="submit"
-                  className="inline-flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-brand-600 px-6 font-bold text-white transition-colors hover:bg-brand-700 dark:bg-brand-400 dark:text-brand-950"
+                  className="inline-flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-am4-blue px-6 font-bold text-white transition-colors hover:bg-brand-700"
                 >
                   Continue
                   <ArrowRight className="size-5" aria-hidden="true" />
@@ -247,6 +236,6 @@ export function ContactPage() {
           </Callout>
         </div>
       </section>
-    </>
+    </div>
   )
 }

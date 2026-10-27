@@ -30,25 +30,25 @@ export function PlanBar({ plan, estimate, serviceCount, step, lastStep, onBack, 
 
   return (
     <div
-      className="sticky bottom-0 z-30 -mx-[clamp(1rem,0.5rem+2vw,2rem)] border-t border-line bg-surface/95 backdrop-blur-lg lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 backdrop-blur-lg lg:hidden"
       style={{ paddingBottom: 'var(--spacing-safe-bottom)' }}
     >
       <div className="px-[clamp(1rem,0.5rem+2vw,2rem)] py-3">
         <p className="mb-2.5 text-xs font-semibold text-ink-soft">{headline}</p>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {step > 0 && (
             <Button variant="outline" size="md" onClick={onBack} iconLeft={<ArrowLeft className="size-4" aria-hidden="true" />}>
               Back
             </Button>
           )}
           {step < lastStep ? (
-            <Button size="md" className="flex-1" onClick={onNext} iconRight={<ArrowRight className="size-4" aria-hidden="true" />}>
+            <Button size="md" className="min-w-max flex-1" onClick={onNext} iconRight={<ArrowRight className="size-4" aria-hidden="true" />}>
               Continue
             </Button>
           ) : (
             <Button
               size="md"
-              className="flex-1"
+              className="min-w-max flex-1"
               onClick={() => document.getElementById('send-booking')?.scrollIntoView({ block: 'center' })}
               iconRight={<Send className="size-4" aria-hidden="true" />}
             >

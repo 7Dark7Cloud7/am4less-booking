@@ -1,10 +1,4 @@
-export type ServiceCategoryId =
-  | 'recurring'
-  | 'construction'
-  | 'event'
-  | 'logistics'
-  | 'deep'
-  | 'moveout'
+export type ServiceCategoryId = 'recurring' | 'event' | 'deep' | 'moveout'
 
 export type PropertyType =
   | 'office'
@@ -12,8 +6,6 @@ export type PropertyType =
   | 'school'
   | 'retail'
   | 'warehouse'
-  | 'residence'
-  | 'construction-site'
   | 'event-venue'
 
 export type Frequency = 'once' | 'weekly' | 'biweekly' | 'monthly' | 'quarterly'

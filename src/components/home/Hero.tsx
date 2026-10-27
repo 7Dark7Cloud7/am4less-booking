@@ -1,69 +1,22 @@
-import { ArrowRight, Phone } from 'lucide-react'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { BUSINESS } from '../../domain/business'
-import { BOOKABLE } from '../../domain/services'
-import { PHOTOS } from '../../domain/media'
-import { LinkButton, RouteButton } from '../Button'
+import { QuickQuote } from '../QuickQuote'
+import type { QuickBookingController } from '../../hooks/useQuickBooking'
 
-const PROOF = [
-  { value: '20+', label: 'Years of combined crew experience' },
-  { value: `${BOOKABLE.length}`, label: 'Services bookable online today' },
-  { value: '1 hr', label: 'Typical reply on a new request' },
-  { value: 'Free', label: 'On-site walkthrough & written quote' }
-]
-
-export function Hero() {
+export function Hero({ booking }: { booking: QuickBookingController }) {
   return (
-    <section className="relative isolate overflow-hidden">
-      <img
-        src={PHOTOS.heroCrew}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 size-full object-cover opacity-55"
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 lux-hero-scrim"
-      />
-      <div aria-hidden="true" className="absolute inset-0 lux-glow-blue" />
-
-      <div className="relative mx-auto flex min-h-[84svh] max-w-[84rem] flex-col justify-end px-5 pt-16 pb-12 sm:px-8 lg:px-12 lg:pb-16">
-        <p className="lux-eyebrow reveal">
-          Quakertown · Bucks &amp; Lehigh County
-          <span className="hidden sm:inline"> · Pennsylvania</span>
-        </p>
-
-        <h1 className="reveal mt-6 max-w-[24ch] text-[clamp(2.6rem,7vw,5.6rem)] font-light text-lux-fg">
-          Develop a <span className="text-accent-400">spotless</span> reputation.
-        </h1>
-
-        <p className="reveal mt-6 max-w-xl text-base leading-relaxed text-lux-fg-soft sm:text-lg">
-          Commercial and residential cleaning for buildings that get walked, audited and photographed. We size the crew
-          before we ever quote the job.
-        </p>
-
-        <div className="reveal mt-9 flex flex-wrap items-center gap-3">
-          <RouteButton to="/book" variant="accent" size="lg">
-            Start my quote
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </RouteButton>
-          <LinkButton href={BUSINESS.phoneHref} variant="outlineOnDark" size="lg">
-            <Phone className="size-4" aria-hidden="true" />
-            {BUSINESS.phoneDisplay}
-          </LinkButton>
+    <section className="am4-hero" aria-labelledby="home-heading">
+      <div className="am4-hero-copy">
+        <h1 id="home-heading">Less mess.<br /><span>More room.</span></h1>
+        <p>Commercial cleaning. More room for the work, the people and the life that fill your space.</p>
+        <div className="am4-hero-actions">
+          <a href="#quick-booking" className="am4-button am4-button-red">Plan my cleaning <ArrowUpRight className="size-5" aria-hidden="true" /></a>
+          <Link to="/about" className="am4-text-link">Our story <ArrowUpRight className="size-4" aria-hidden="true" /></Link>
         </div>
-
-        <dl className="reveal mt-14 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-white/12 pt-8 lg:grid-cols-4">
-          {PROOF.map((item) => (
-            <div key={item.label}>
-              <dt className="font-[family-name:var(--font-lux-display)] text-3xl font-light text-lux-fg">{item.value}</dt>
-              <dd className="mt-1.5 text-xs leading-relaxed text-lux-fg-faint">{item.label}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className="am4-hero-foot"><Sparkles className="size-5" aria-hidden="true" /><span>Based in {BUSINESS.city}, {BUSINESS.region}<br />Serving all of Pennsylvania</span></div>
       </div>
+      <QuickQuote booking={booking} />
     </section>
   )
 }

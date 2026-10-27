@@ -18,8 +18,6 @@ const PROPERTY_TYPES: PropertyType[] = [
   'school',
   'medical',
   'warehouse',
-  'residence',
-  'construction-site',
   'event-venue'
 ]
 

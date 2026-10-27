@@ -41,22 +41,6 @@ export const SERVICES: readonly ServiceItem[] = [
     popular: true
   },
   {
-    id: 'rec-residential',
-    name: 'Residential recurring clean',
-    summary: 'Recurring whole-home cleaning for houses and apartments.',
-    details: [
-      'Kitchen, baths, floors, dusting and vacuum throughout',
-      'Cabinet fronts, appliance exteriors and mirrors',
-      'Linens and consumables refreshed on request'
-    ],
-    category: 'recurring',
-    pricing: { kind: 'hourly', rate: 48, minHours: 3 },
-    durationHours: 4,
-    requiresSiteVisit: false,
-    intensity: 1,
-    popular: true
-  },
-  {
     id: 'rec-medical',
     name: 'Medical & school-grade disinfection',
     summary: 'Infection-control protocols for clinics, schools and care facilities.',
@@ -71,59 +55,6 @@ export const SERVICES: readonly ServiceItem[] = [
     durationHours: 4,
     requiresSiteVisit: true,
     intensity: 2
-  },
-
-  // ---- construction ----
-  {
-    id: 'con-dust',
-    name: 'Debris & fine dust removal',
-    summary: 'Scrape paint splatter, pull drywall dust, stickers and grout residue.',
-    details: [
-      'Drywall and sanding dust extracted from all cavities and ledges',
-      'Paint, silicone and grout haze removed from frames and glass',
-      'Sticker and label residue dissolved without surface damage',
-      'HEPA vacuum and damp-wipe two-pass finish'
-    ],
-    category: 'construction',
-    pricing: { kind: 'per-square-foot', rate: 0.22, minCharge: 400 },
-    durationHours: 8,
-    requiresSiteVisit: false,
-    intensity: 3,
-    popular: true
-  },
-  {
-    id: 'con-furniture',
-    name: 'Furniture unpack & assembly',
-    summary: 'Unbox, build and arrange desks, task chairs and modular workstations.',
-    details: [
-      'Box breakdown and cardboard removed same day',
-      'Panel systems, pedestal desks and task chairs assembled',
-      'Layout set to your floor plan, levelled and anchored',
-      'Packaging hauled off — no dumpsters to fill'
-    ],
-    category: 'construction',
-    pricing: { kind: 'hourly', rate: 68, minHours: 4 },
-    durationHours: 6,
-    requiresSiteVisit: false,
-    intensity: 2,
-    comingSoon: true
-  },
-  {
-    id: 'con-fixture',
-    name: 'Fixture, ductwork & high-level detail',
-    summary: 'Clean light fixtures, overhead ductwork and structural beams before handover.',
-    details: [
-      'Lens and diffuser removal, wash, reinstall',
-      'High-level duct exterior and return grille degreasing',
-      'Beams, trusses and sprinkler heads dusted from lift',
-      'Certificate-ready clean for the owner walkthrough'
-    ],
-    category: 'construction',
-    pricing: { kind: 'quote-only' },
-    durationHours: 10,
-    requiresSiteVisit: true,
-    intensity: 3,
-    comingSoon: true
   },
 
   // ---- event ----
@@ -177,59 +108,6 @@ export const SERVICES: readonly ServiceItem[] = [
     requiresSiteVisit: false,
     intensity: 3,
     popular: true
-  },
-
-  // ---- logistics ----
-  {
-    id: 'log-supplies',
-    name: 'Supply & chemical logistics',
-    summary: 'Move power washers, buffer machines, chemicals and consumables between sites.',
-    details: [
-      'Secure transport of equipment between active job sites',
-      'SDS-compliant handling and containment of chemicals',
-      'Fuel, water and power top-up before arrival',
-      'Same-day and next-day dispatch windows'
-    ],
-    category: 'logistics',
-    pricing: { kind: 'flat', amount: 165 },
-    durationHours: 2,
-    requiresSiteVisit: false,
-    intensity: 1,
-    comingSoon: true
-  },
-  {
-    id: 'log-haul',
-    name: 'Bulk waste & furniture hauling',
-    summary: 'Clear old furniture, broken appliances, mattresses and scrap for disposal or donation.',
-    details: [
-      'Load-out of desks, seating, appliances and mattresses',
-      'Donation drop-off with receipt where salvageable',
-      'Scrap metal separated for recycling revenue',
-      'Dumpster fees and tipping charges included in quote'
-    ],
-    category: 'logistics',
-    pricing: { kind: 'flat', amount: 340 },
-    durationHours: 4,
-    requiresSiteVisit: false,
-    intensity: 2,
-    comingSoon: true
-  },
-  {
-    id: 'log-rental',
-    name: 'Equipment rental transport',
-    summary: 'Deliver and retrieve air movers, dehumidifiers and scaffold towers.',
-    details: [
-      'Drop and pick-up of high-power drying equipment',
-      'Scaffold tower delivery, unloading and placement',
-      'Daily unit checks during the rental window',
-      'Coordinated with your restoration vendor or insurer'
-    ],
-    category: 'logistics',
-    pricing: { kind: 'flat', amount: 190 },
-    durationHours: 3,
-    requiresSiteVisit: false,
-    intensity: 1,
-    comingSoon: true
   },
 
   // ---- deep ----
@@ -323,7 +201,7 @@ export const SERVICES: readonly ServiceItem[] = [
 
 export const SERVICE_BY_ID = new Map(SERVICES.map((s) => [s.id, s]))
 
-/** The nine lines a customer can actually book today. */
+/** The seven lines a customer can actually book today. */
 export const BOOKABLE = SERVICES.filter((s) => !s.comingSoon)
 
 export function servicesInCategory(id: string): ServiceItem[] {

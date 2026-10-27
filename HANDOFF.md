@@ -6,7 +6,7 @@ Everything a developer needs to pick this project up cold. Read sections 1–3 b
 
 ## 1. What this is
 
-A single-page React application (installable PWA) for **AM4LESS**, a commercial & residential
+A single-page React application (installable PWA) for **AM4LESS**, a commercial
 cleaning company in Quakertown, PA (Bucks & Lehigh County). It replaces a marketing-only Duda
 site with an **online client-acquisition tool**: browse services → get a scoped quote request →
 send it to the crew — no account, no card, no backend required.
@@ -59,8 +59,8 @@ npm run photos:sheet # contact sheets of photos-src/ for picking new photo slugs
 npm run icons        # regenerate PWA icons from public/brand/logo-am4less.webp
 ```
 
-**Tests:** `npm run test` (Vitest, node environment, no DOM) covers the pure `src/domain/*` logic — 72 tests in
-six files: `services.test.ts` (the nine-line bookability rule), `estimate.test.ts` (the internal dollar maths),
+**Tests:** `npm run test` (Vitest, node environment, no DOM) covers the pure `src/domain/*` logic — 74 tests in
+six files: `services.test.ts` (the seven-line bookability rule), `estimate.test.ts` (the internal dollar maths),
 `job-plan.test.ts` (crew sizing and cadence wording), `validation.test.ts` (contact and draft rules),
 `booking.test.ts` (reference format, draft vs submitted) and `pricing-rules.test.ts` (no `$` may leave the
 customer-facing string builders). There are still **no component or E2E tests**: browser QA in §9 covers those.
@@ -72,24 +72,30 @@ A change to a domain rule should arrive with its test updated in the same commit
 
 These come directly from the business owner and are the most important context in this document.
 
-### 3a. Only the 9 cleaning lines are bookable
+### 3a. Only the 7 cleaning lines are bookable
 
-The catalogue in `src/domain/services.ts` lists **18 lines**. The owner offers cleaning today;
-construction, event-production, logistics and some deep-maintenance lines are marketed but
-**not yet serviced**. Nine lines carry `comingSoon: true`.
+The catalogue in `src/domain/services.ts` lists **11 lines**. The owner offers commercial cleaning today;
+event set-up/LED and the two restoration/HVAC lines are marketed but **not yet serviced**. Four lines carry
+`comingSoon: true`.
+
+Retired on 2026-10-27 on the owner's instruction: the `construction` and `logistics` categories and all six of
+their lines (`con-dust`, `con-furniture`, `con-fixture`, `log-supplies`, `log-haul`, `log-rental`) were deleted,
+and so was the residential line — `rec-residential`/`rec-apartment` is gone along with the `residence`
+`PropertyType`. **AM4LESS is commercial only.** Do not reintroduce any of those ids, categories or property
+types without the owner.
 
 - `BOOKABLE` (same file) = `SERVICES.filter(s => !s.comingSoon)` — use it anywhere you count or list what a customer can actually buy.
 - `/services` shows coming-soon lines as greyed shadow cards ("Coming soon"), never selectable.
-- The booking wizard never offers them: `ServicesStep` filters the category strip to categories that have a bookable line, and `useBooking.loadDraft()` silently drops any stale draft service id that is no longer bookable.
-- Counts on Home, About, Training and the Services hero all read from `BOOKABLE.length` — do not hardcode "9".
+- The booking wizard never offers them: `ServicesStep` filters the category strip to categories that have a bookable line, and `useBooking.loadDraft()` silently drops any stale draft service id that is no longer bookable, or a property type that no longer exists.
+- Counts on Home, About, Training and the Services hero all read from `BOOKABLE.length` — do not hardcode the number.
 
 **To launch a line:** delete its `comingSoon: true` in `services.ts`. The filter strip, counts,
 wizard and job planner all pick it up automatically.
 
-`src/domain/services.test.ts` pins the nine ids by name and asserts that every other line — including the
-transport, staging and lighting ones — stays unbookable, and that an unknown id is *not* bookable. Launching a
-line without asking the owner is exactly what that test catches, so update the fixture in the same commit and
-say so in the PR.
+`src/domain/services.test.ts` pins the seven ids by name, pins that the retired construction, transport and
+residential ids are out of the catalogue, asserts the remaining categories, and asserts that the staging and
+lighting lines stay unbookable and that an unknown id is *not* bookable. Launching a line without asking the
+owner is exactly what that test catches, so update the fixture in the same commit and say so in the PR.
 
 ### 3b. No published prices until the owner sets a rate card
 

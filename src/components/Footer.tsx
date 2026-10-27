@@ -7,9 +7,11 @@ import { CATEGORIES } from '../domain/categories'
 interface FooterProps {
   /** `lux` matches the dark editorial home page; `light` is the default commercial shell. */
   tone?: 'light' | 'lux'
+  /** The booking wizard pins its PlanBar over the bottom of the phone screen, so the marketing footer waits for desktop. */
+  hideOnMobile?: boolean
 }
 
-export function Footer({ tone = 'light' }: FooterProps) {
+export function Footer({ tone = 'light', hideOnMobile = false }: FooterProps) {
   const lux = tone === 'lux'
   const linkClass = lux
     ? 'text-lux-fg-soft no-underline transition-colors hover:text-accent-400'
@@ -19,7 +21,7 @@ export function Footer({ tone = 'light' }: FooterProps) {
 
   return (
     <footer
-      className={`${lux ? 'font-[family-name:var(--font-lux)] border-t border-brand-800/70 bg-lux-base text-lux-fg-soft' : 'mt-16 bg-brand-950 text-brand-100 dark:bg-[oklch(0.12_0.025_266)]'}`}
+      className={`am4-site-footer ${hideOnMobile ? 'hidden lg:block' : ''} ${lux ? 'font-[family-name:var(--font-lux)] border-t border-brand-800/70 bg-lux-base text-lux-fg-soft' : 'bg-brand-950 text-brand-100 dark:bg-[oklch(0.12_0.025_266)]'}`}
     >
       <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] pt-14 pb-[calc(5.5rem+var(--spacing-safe-bottom))] lg:pb-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">

@@ -6,16 +6,8 @@ export const CATEGORIES: readonly ServiceCategory[] = [
     name: 'Recurring Janitorial & Floor Care',
     tagline: 'The work that keeps a building presentable every single day',
     blurb:
-      'Scheduled commercial and residential cleaning: surfaces, restrooms, floors, trash and consumables. Contracted weekly, bi-weekly, monthly or quarterly.',
+      'Scheduled commercial cleaning: surfaces, restrooms, floors, trash and consumables. Contracted weekly, bi-weekly, monthly or quarterly.',
     icon: 'sparkles'
-  },
-  {
-    id: 'construction',
-    name: 'Post-Construction & Renovation Cleanup',
-    tagline: 'From rough-in to handover-ready',
-    blurb:
-      'Builders and GCs need a site inspection-ready in days. We remove construction dust, paint splatter, stickers and grout residue, then detail floors and glass before the walkthrough. Furniture installation and high-level fixture work opens next.',
-    icon: 'hard-hat'
   },
   {
     id: 'event',
@@ -24,14 +16,6 @@ export const CATEGORIES: readonly ServiceCategory[] = [
     blurb:
       'After the last guest leaves we sort waste, clear bottles, scrub floors and restore the venue against a tight overnight deadline — that part is bookable today. Table, chair, staging and tent set-up and temporary LED lighting are on the rollout list.',
     icon: 'party-popper'
-  },
-  {
-    id: 'logistics',
-    name: 'Specialized Transport & Logistics',
-    tagline: 'Moving heavy gear and hauling the rest out',
-    blurb:
-      'Shuttling industrial supplies and machines between job sites, hauling off furniture, appliances and scrap for disposal or donation, and delivering air movers, dehumidifiers and scaffold towers. This whole line is being stood up — join the notify list and we will call you when it opens.',
-    icon: 'truck'
   },
   {
     id: 'deep',

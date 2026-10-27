@@ -5,6 +5,7 @@ import { BUSINESS, CORE_VALUES } from '../domain/business'
 import { digits, formatPhone } from '../domain/validation'
 import { LinkButton, RouteButton } from '../components/Button'
 import { Callout, IconTile, SectionHeading } from '../components/ui'
+import { PageHero } from '../components/PageHero'
 import { ChoiceCard, TextArea, TextField } from '../components/Field'
 
 interface Application {
@@ -18,11 +19,9 @@ interface Application {
 
 const ROLES = [
   'Crew member — commercial',
-  'Crew member — residential',
   'Specialty tech (exterior / upholstery / restoration)',
   'Supervisor / lead',
-  'Trainer — Mastery Program',
-  'Driver / logistics'
+  'Trainer — Mastery Program'
 ] as const
 
 const EMPTY: Application = { firstName: '', lastName: '', phone: '', email: '', role: ROLES[0], info: '' }
@@ -59,19 +58,11 @@ export function CareersPage() {
   }
 
   return (
-    <>
-      <section className="bg-inverse py-14 text-inverse-ink">
-        <div className="mx-auto max-w-5xl px-[clamp(1rem,0.5rem+2vw,2rem)]">
-          <p className="mb-3 text-xs font-bold tracking-[0.14em] text-brand-200 uppercase">Careers</p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold sm:text-5xl">
-            Start as crew. Leave as an owner.
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-brand-100">
-            {BUSINESS.foundedNote}, and a training path that exists because empowerment is the stated mission, not a
-            word on a wall.
-          </p>
-        </div>
-      </section>
+    <div className="am4-route">
+      <PageHero
+        title={<>Start as crew.<br /><span>Leave as an owner.</span></>}
+        intro={`${BUSINESS.foundedNote}, and a training path that exists because empowerment is the stated mission, not a word on a wall.`}
+      />
 
       <section className="mx-auto grid max-w-5xl gap-10 px-[clamp(1rem,0.5rem+2vw,2rem)] py-14 lg:grid-cols-2">
         <div>
@@ -83,7 +74,7 @@ export function CareersPage() {
             </li>
             <li>
               <strong className="text-ink">Tools and transport.</strong> Equipment and chemicals are supplied. Some
-              specialty and logistics roles need a valid licence for towing or hauling.
+              specialty roles need a valid licence for the machines they run.
             </li>
             <li>
               <strong className="text-ink">Progression.</strong> Crew, lead, supervisor, then the Mastery Program if you
@@ -227,7 +218,7 @@ export function CareersPage() {
 
                 <button
                   type="submit"
-                  className="inline-flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-brand-600 px-6 font-bold text-white transition-colors hover:bg-brand-700 dark:bg-brand-400 dark:text-brand-950"
+                  className="inline-flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-am4-blue px-6 font-bold text-white transition-colors hover:bg-brand-700"
                 >
                   Continue
                   <ArrowRight className="size-5" aria-hidden="true" />
@@ -243,6 +234,6 @@ export function CareersPage() {
           )}
         </div>
       </section>
-    </>
+    </div>
   )
 }

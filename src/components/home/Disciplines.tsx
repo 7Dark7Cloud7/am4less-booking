@@ -1,51 +1,30 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
-import { Photo } from '../Photo'
-import type { PhotoKey } from '../../domain/media'
-import { BOOKABLE } from '../../domain/services'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
+import { isBookable, SERVICE_BY_ID } from '../../domain/services'
+import { PHOTOS } from '../../domain/media'
+import { HOME_SERVICES } from './homeServices'
 
-const TILES: { id: string; kicker: string; line: string; photo: PhotoKey }[] = [
-  { id: 'recurring', kicker: 'Recurring programs', line: 'Scheduled weekly to quarterly', photo: 'heroCrew' },
-  { id: 'construction', kicker: 'Construction handovers', line: 'Inspection-ready before the walkthrough', photo: 'postConstruction' },
-  { id: 'event', kicker: 'Event turnarounds', line: 'Cleared before the morning booking', photo: 'eventSetup' }
-]
-
-export function Disciplines() {
+export function Disciplines({ serviceId, onSelect }: { serviceId: string; onSelect: (id: string) => void }) {
   return (
-    <section className="mx-auto max-w-[84rem] px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <p className="lux-eyebrow">What we clean</p>
-          <h2 className="mt-5 max-w-[18ch] text-[clamp(2rem,4vw,3.4rem)] font-light text-lux-fg">
-            Built for every building.
-          </h2>
-        </div>
-        <Link to="/services" className="lux-link text-lux-fg-faint hover:text-accent-400">
-          All {BOOKABLE.length} services
-          <ArrowUpRight className="size-4" aria-hidden="true" />
-        </Link>
+    <section className="am4-services" aria-labelledby="services-heading">
+      <div className="am4-section-heading">
+        <h2 id="services-heading">Different spaces.<br /><span>Same attention.</span></h2>
+        <div><p>From the everyday clean to the big reset.<br />Choose the work your space needs.</p><Link to="/services" className="am4-inline-link">Explore all services <ArrowUpRight className="size-5" aria-hidden="true" /></Link></div>
       </div>
-
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
-        {TILES.map((tile) => (
-          <Link
-            key={tile.id}
-            to={`/services#${tile.id}`}
-            className="group relative block overflow-hidden no-underline"
-          >
-            <Photo
-              slot={tile.photo}
-              ratio="4 / 5"
-              scrim="dark"
-              className="w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-6">
-              <span aria-hidden="true" className="mb-4 block h-px w-10 bg-accent-400" />
-              <h3 className="text-2xl font-normal text-lux-fg">{tile.kicker}</h3>
-              <p className="mt-2 text-sm text-lux-fg-soft">{tile.line}</p>
-            </div>
-          </Link>
-        ))}
+      <div className="am4-service-layout">
+        <figure className="am4-service-photo">
+          <img src={PHOTOS.pressureWashing} alt="An outdoor court after pressure washing by AM4LESS" loading="lazy" decoding="async" />
+          <figcaption><Sparkles className="size-6" aria-hidden="true" /><span>A fresh perspective.<br /><strong>Inside &amp; out.</strong></span></figcaption>
+        </figure>
+        <div className="am4-service-list">
+          {HOME_SERVICES.map(({ id, title, icon: Icon }) => (
+            <article key={id} className="am4-service-row" data-selected={serviceId === id} data-unavailable={!isBookable(id)}>
+              <Icon className="size-6 shrink-0" aria-hidden="true" />
+              <div><h3>{title}</h3><p>{isBookable(id) ? SERVICE_BY_ID.get(id)?.summary : 'Coming soon · Not available to book yet'}</p></div>
+              {isBookable(id) ? <a href="#quick-booking" onClick={() => onSelect(id)} aria-label={`Plan ${title.toLowerCase()}`} className="am4-service-action"><ArrowUpRight className="size-5" aria-hidden="true" /></a> : <span className="am4-unavailable">Soon</span>}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import { GALLERY_FILTERS, SHOTS, fullSrc, thumbSrc, type GalleryCat, type Shot } from '../domain/media'
 import { RouteButton } from '../components/Button'
+import { PageHero } from '../components/PageHero'
 import { SectionHeading } from '../components/ui'
 
 type Filter = GalleryCat | 'all'
@@ -58,19 +59,11 @@ export function GalleryPage() {
   const shown = useMemo(() => (filter === 'all' ? SHOTS : SHOTS.filter((s) => s.cat === filter)), [filter])
 
   return (
-    <>
-      <section className="bg-inverse py-14 text-inverse-ink">
-        <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)]">
-          <p className="mb-3 text-xs font-bold tracking-[0.14em] text-brand-200 uppercase">Our work</p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold sm:text-5xl">
-            {SHOTS.length} photos from our own job sites
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-brand-100">
-            Hospitals, schools, churches, offices and exteriors across Bucks and Lehigh County. No stock imagery — tap
-            any photo to see it full size.
-          </p>
-        </div>
-      </section>
+    <div className="am4-route">
+      <PageHero
+        title={<>Our work.<br /><span>Photos, not promises.</span></>}
+        intro={`${SHOTS.length} real job-site photos from offices, schools, healthcare and exteriors across Bucks and Lehigh County. No stock imagery — tap any photo to see it full size.`}
+      />
 
       <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] py-10">
         <div
@@ -86,7 +79,7 @@ export function GalleryPage() {
               onClick={() => setFilter(f.id)}
               className={`min-h-[2.75rem] shrink-0 snap-start rounded-full border px-4 text-sm font-semibold transition-colors ${
                 filter === f.id
-                  ? 'border-brand-600 bg-brand-600 text-white'
+                  ? 'border-am4-blue bg-am4-blue text-white'
                   : 'border-line-strong bg-surface text-ink-soft hover:border-brand-400 hover:text-brand-600'
               }`}
             >
@@ -136,6 +129,6 @@ export function GalleryPage() {
       </div>
 
       {open && <Lightbox shot={open} onClose={() => setOpen(null)} />}
-    </>
+    </div>
   )
 }
