@@ -364,6 +364,15 @@
   text-wrap: balance;
 }
 
+/* Swipeable chip rows: keep the gesture, drop the desktop-style bar that clipped the last chip. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* ---------- motion ---------- */
 @keyframes rise {
   from {

@@ -36,7 +36,7 @@ export function BrandMark({
             AM4<span className={lux ? 'text-accent-400' : 'text-accent-600 dark:text-accent-400'}>LESS</span>
           </span>
           <span
-            className={`mt-0.5 block text-[0.63rem] font-semibold uppercase tracking-[0.14em] ${lux ? 'text-brand-200' : 'text-ink-faint'}`}
+            className={`mt-0.5 block text-[0.63rem] font-semibold uppercase tracking-[0.14em] max-[359.98px]:hidden ${lux ? 'text-brand-200' : 'text-ink-faint'}`}
           >
             Cleaning Services
           </span>

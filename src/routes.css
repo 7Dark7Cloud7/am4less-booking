@@ -47,6 +47,10 @@
     .am4-page-hero h1 { font-size: clamp(3.25rem, 15vw, 4.75rem); }
     .am4-page-hero-aside { padding: 1rem; }
     .am4-not-found { width: calc(100% - 1.5rem); margin-top: 0; }
+    /* the banner is chrome, not content: keep the question and its first control on screen */
+    .am4-book-header { gap: 0.75rem; padding: 1rem 1.125rem; }
+    .am4-book-header > span { width: 2.5rem; height: 2.5rem; }
+    .am4-book-header h1 { font-size: 1.5rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .am4-route *, .am4-route *::before, .am4-route *::after { animation: none; transition: none; scroll-behavior: auto; }

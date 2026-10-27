@@ -116,7 +116,7 @@ export function ServicesPage() {
       </PageHero>
 
       <nav aria-label="Jump to category" className="sticky top-[4.25rem] z-30 border-b border-line bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl gap-1.5 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] py-3">
+        <div className="no-scrollbar mx-auto flex max-w-7xl gap-1.5 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] py-3">
           {CATEGORIES.map((category) => (
             <a
               key={category.id}

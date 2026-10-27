@@ -69,7 +69,7 @@ export function GalleryPage() {
         <div
           role="group"
           aria-label="Filter photos by type of work"
-          className="-mx-[clamp(1rem,0.5rem+2vw,2rem)] flex snap-x gap-2 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] pb-3"
+          className="no-scrollbar -mx-[clamp(1rem,0.5rem+2vw,2rem)] flex snap-x gap-2 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] pb-3"
         >
           {GALLERY_FILTERS.map((f) => (
             <button

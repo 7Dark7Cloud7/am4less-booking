@@ -36,7 +36,7 @@ export function ServicesStep({ controller }: { controller: BookingController }) 
       <div
         role="group"
         aria-label="Filter services by category"
-        className="-mx-[clamp(1rem,0.5rem+2vw,2rem)] flex snap-x gap-2 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] pb-1"
+        className="no-scrollbar -mx-[clamp(1rem,0.5rem+2vw,2rem)] flex snap-x gap-2 overflow-x-auto px-[clamp(1rem,0.5rem+2vw,2rem)] pb-1"
       >
         <FilterChip active={filter === 'all'} onClick={() => setFilter('all')} label="All services" />
         {FILTERABLE_CATEGORIES.map((category) => (

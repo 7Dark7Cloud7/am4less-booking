@@ -79,7 +79,7 @@ export function BookPage() {
 
   return (
     <div className="am4-route-utility">
-      <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] pt-8 pb-48 lg:pb-8">
+      <div className="mx-auto max-w-7xl px-[clamp(1rem,0.5rem+2vw,2rem)] pt-5 pb-48 lg:pt-8 lg:pb-8">
         <div className="am4-book-header">
           <span className="grid size-11 place-items-center rounded-xl">
             <CalendarCheck2 className="size-6" aria-hidden="true" />
